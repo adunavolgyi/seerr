@@ -69,6 +69,7 @@ const globalMessages = defineMessages('i18n', {
   addToBlocklist: 'Add to Blocklist',
   removefromBlocklist: 'Remove from Blocklist',
   specials: 'Specials',
+  notificationLocale: 'Notification Language',
 });
 
 export default globalMessages;

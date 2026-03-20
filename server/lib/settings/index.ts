@@ -1,6 +1,7 @@
 import { MediaServerType } from '@server/constants/server';
 import { Permission } from '@server/lib/permissions';
 import { runMigrations } from '@server/lib/settings/migrator';
+import type { AvailableLocale } from '@server/types/languages';
 import { randomUUID } from 'crypto';
 import fs from 'fs/promises';
 import { mergeWith } from 'lodash';
@@ -226,12 +227,15 @@ export interface NotificationAgentDiscord extends NotificationAgentConfig {
     webhookUrl: string;
     webhookRoleId?: string;
     enableMentions: boolean;
+    locale: AvailableLocale;
+    useUserLocale: boolean;
   };
 }
 
 export interface NotificationAgentSlack extends NotificationAgentConfig {
   options: {
     webhookUrl: string;
+    locale: AvailableLocale;
   };
 }
 
@@ -293,6 +297,7 @@ export interface NotificationAgentGotify extends NotificationAgentConfig {
     url: string;
     token: string;
     priority: number;
+    locale: AvailableLocale;
   };
 }
 
@@ -306,6 +311,7 @@ export interface NotificationAgentNtfy extends NotificationAgentConfig {
     authMethodToken?: boolean;
     token?: string;
     priority?: number;
+    locale: AvailableLocale;
   };
 }
 
@@ -469,6 +475,8 @@ class Settings {
               webhookUrl: '',
               webhookRoleId: '',
               enableMentions: true,
+              locale: 'en',
+              useUserLocale: true,
             },
           },
           slack: {
@@ -477,6 +485,7 @@ class Settings {
             types: 0,
             options: {
               webhookUrl: '',
+              locale: 'en',
             },
           },
           telegram: {
@@ -531,6 +540,7 @@ class Settings {
               url: '',
               token: '',
               priority: 0,
+              locale: 'en',
             },
           },
           ntfy: {
@@ -541,6 +551,7 @@ class Settings {
               url: '',
               topic: '',
               priority: 3,
+              locale: 'en',
             },
           },
         },
@@ -799,16 +810,22 @@ class Settings {
       await this.save();
     }
 
+    let change = false;
     if (data && !raw) {
       const parsedJson = JSON.parse(data);
       const migratedData = await runMigrations(parsedJson, SETTINGS_PATH);
-      this.data = mergeSettings(this.data, migratedData);
+      const merged = mergeSettings(this.data, migratedData);
+
+      if (JSON.stringify(merged) !== JSON.stringify(migratedData)) {
+        change = true;
+      }
+
+      this.data = merged;
     } else if (data) {
       this.data = JSON.parse(data);
     }
 
     // generate keys and ids if it's missing
-    let change = false;
     if (!this.data.main.apiKey) {
       this.data.main.apiKey = this.generateApiKey();
       change = true;
