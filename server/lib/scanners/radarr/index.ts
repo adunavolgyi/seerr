@@ -1,5 +1,8 @@
 import type { RadarrMovie } from '@server/api/servarr/radarr';
 import RadarrAPI from '@server/api/servarr/radarr';
+import { MediaStatus, MediaType } from '@server/constants/media';
+import { getRepository } from '@server/datasource';
+import Media from '@server/entity/Media';
 import type {
   RunnableScanner,
   StatusBase,
@@ -21,6 +24,7 @@ class RadarrScanner
   private servers: RadarrSettings[];
   private currentServer: RadarrSettings;
   private radarrApi: RadarrAPI;
+  private scannedTmdbIds: Set<number> = new Set();
 
   constructor() {
     super('Radarr Scan', { bundleSize: 50 });
@@ -39,6 +43,7 @@ class RadarrScanner
   public async run(): Promise<void> {
     const settings = getSettings();
     const sessionId = this.startRun();
+    this.scannedTmdbIds.clear();
 
     try {
       this.servers = uniqWith(settings.radarr, (radarrA, radarrB) => {
@@ -70,6 +75,7 @@ class RadarrScanner
         }
       }
 
+      await this.cleanupOrphanedMovies();
       this.log('Radarr scan complete', 'info');
     } catch (e) {
       this.log('Scan interrupted', 'error', { errorMessage: e.message });
@@ -79,16 +85,7 @@ class RadarrScanner
   }
 
   private async processRadarrMovie(radarrMovie: RadarrMovie): Promise<void> {
-    if (!radarrMovie.monitored && !radarrMovie.hasFile) {
-      this.log(
-        'Title is unmonitored and has not been downloaded. Skipping item.',
-        'debug',
-        {
-          title: radarrMovie.title,
-        }
-      );
-      return;
-    }
+    this.scannedTmdbIds.add(radarrMovie.tmdbId);
 
     try {
       const server4k = this.enable4kMovie && this.currentServer.is4k;
@@ -98,13 +95,53 @@ class RadarrScanner
         externalServiceId: radarrMovie.id,
         externalServiceSlug: radarrMovie.titleSlug,
         title: radarrMovie.title,
-        processing: !radarrMovie.hasFile,
+        processing: !radarrMovie.hasFile && radarrMovie.monitored,
+        hasFile: radarrMovie.hasFile,
       });
     } catch (e) {
       this.log('Failed to process Radarr media', 'error', {
         errorMessage: e.message,
         title: radarrMovie.title,
       });
+    }
+  }
+
+  private async cleanupOrphanedMovies(): Promise<void> {
+    const mediaRepository = getRepository(Media);
+
+    const processingMovies = await mediaRepository.find({
+      where: { mediaType: MediaType.MOVIE, status: MediaStatus.PROCESSING },
+    });
+
+    for (const media of processingMovies) {
+      if (!this.scannedTmdbIds.has(media.tmdbId)) {
+        media.status = MediaStatus.UNKNOWN;
+        await mediaRepository.save(media);
+        this.log(
+          `Movie ${media.tmdbId} not found in any Radarr server. Status reset to UNKNOWN.`,
+          'info'
+        );
+      }
+    }
+
+    if (this.enable4kMovie) {
+      const processing4kMovies = await mediaRepository.find({
+        where: {
+          mediaType: MediaType.MOVIE,
+          status4k: MediaStatus.PROCESSING,
+        },
+      });
+
+      for (const media of processing4kMovies) {
+        if (!this.scannedTmdbIds.has(media.tmdbId)) {
+          media.status4k = MediaStatus.UNKNOWN;
+          await mediaRepository.save(media);
+          this.log(
+            `Movie ${media.tmdbId} not found in any Radarr server. 4K status reset to UNKNOWN.`,
+            'info'
+          );
+        }
+      }
     }
   }
 }

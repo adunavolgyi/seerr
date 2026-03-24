@@ -7,6 +7,7 @@ import type {
   TmdbKeyword,
   TmdbTvDetails,
 } from '@server/api/themoviedb/interfaces';
+import { MediaStatus, MediaType } from '@server/constants/media';
 import { getRepository } from '@server/datasource';
 import Media from '@server/entity/Media';
 import type {
@@ -31,6 +32,7 @@ class SonarrScanner
   private servers: SonarrSettings[];
   private currentServer: SonarrSettings;
   private sonarrApi: SonarrAPI;
+  private scannedTvdbIds: Set<number> = new Set();
 
   constructor() {
     super('Sonarr Scan', { bundleSize: 50 });
@@ -49,6 +51,7 @@ class SonarrScanner
   public async run(): Promise<void> {
     const settings = getSettings();
     const sessionId = this.startRun();
+    this.scannedTvdbIds.clear();
 
     try {
       this.servers = uniqWith(settings.sonarr, (sonarrA, sonarrB) => {
@@ -80,6 +83,7 @@ class SonarrScanner
         }
       }
 
+      await this.cleanupOrphanedShows();
       this.log('Sonarr scan complete', 'info');
     } catch (e) {
       this.log('Scan interrupted', 'error', { errorMessage: e.message });
@@ -89,6 +93,8 @@ class SonarrScanner
   }
 
   private async processSonarrSeries(sonarrSeries: SonarrSeries) {
+    this.scannedTvdbIds.add(sonarrSeries.tvdbId);
+
     try {
       const mediaRepository = getRepository(Media);
       const server4k = this.enable4kShow && this.currentServer.is4k;
@@ -150,6 +156,54 @@ class SonarrScanner
         errorMessage: e.message,
         title: sonarrSeries.title,
       });
+    }
+  }
+
+  private async cleanupOrphanedShows(): Promise<void> {
+    const mediaRepository = getRepository(Media);
+
+    const processingShows = await mediaRepository.find({
+      where: { mediaType: MediaType.TV, status: MediaStatus.PROCESSING },
+      relations: ['seasons'],
+    });
+
+    for (const media of processingShows) {
+      if (media.tvdbId && !this.scannedTvdbIds.has(media.tvdbId)) {
+        media.status = MediaStatus.UNKNOWN;
+        for (const season of media.seasons) {
+          if (season.status === MediaStatus.PROCESSING) {
+            season.status = MediaStatus.UNKNOWN;
+          }
+        }
+        await mediaRepository.save(media);
+        this.log(
+          `Show ${media.tmdbId} (tvdb: ${media.tvdbId}) not found in any Sonarr server. Status reset to UNKNOWN.`,
+          'info'
+        );
+      }
+    }
+
+    if (this.enable4kShow) {
+      const processing4kShows = await mediaRepository.find({
+        where: { mediaType: MediaType.TV, status4k: MediaStatus.PROCESSING },
+        relations: ['seasons'],
+      });
+
+      for (const media of processing4kShows) {
+        if (media.tvdbId && !this.scannedTvdbIds.has(media.tvdbId)) {
+          media.status4k = MediaStatus.UNKNOWN;
+          for (const season of media.seasons) {
+            if (season.status4k === MediaStatus.PROCESSING) {
+              season.status4k = MediaStatus.UNKNOWN;
+            }
+          }
+          await mediaRepository.save(media);
+          this.log(
+            `Show ${media.tmdbId} (tvdb: ${media.tvdbId}) not found in any 4K Sonarr server. 4K status reset to UNKNOWN.`,
+            'info'
+          );
+        }
+      }
     }
   }
 }
