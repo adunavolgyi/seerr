@@ -96,6 +96,24 @@ class SonarrScanner
         }
       }
 
+      // Only run cleanup if all servers of this profile type have sync enabled.
+      // If any server is skipped, we can't distinguish truly orphaned media from
+      // media that exists on an unscanned server (e.g. separate instances for
+      // anime, regional content, or different languages).
+      const allStandardScanned = this.servers
+        .filter((s) => !this.enable4kShow || !s.is4k)
+        .every((s) => s.syncEnabled);
+      const all4kScanned = this.servers
+        .filter((s) => this.enable4kShow && s.is4k)
+        .every((s) => s.syncEnabled);
+
+      if (!allStandardScanned) {
+        this.didScanStandard = false;
+      }
+      if (!all4kScanned) {
+        this.didScan4k = false;
+      }
+
       await this.cleanupOrphanedShows();
       this.log('Sonarr scan complete', 'info');
     } catch (e) {
