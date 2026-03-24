@@ -117,24 +117,28 @@ class BaseScanner<T> {
         let changedExisting = false;
 
         if (existing[is4k ? 'status4k' : 'status'] !== MediaStatus.AVAILABLE) {
-          existing[is4k ? 'status4k' : 'status'] =
+          const statusField = is4k ? 'status4k' : 'status';
+          const previousStatus = existing[statusField];
+
+          existing[statusField] =
             !processing && hasFile
               ? MediaStatus.AVAILABLE
               : !processing &&
                   !hasFile &&
-                  existing[is4k ? 'status4k' : 'status'] ===
-                    MediaStatus.PROCESSING
+                  previousStatus === MediaStatus.PROCESSING
                 ? MediaStatus.UNKNOWN
                 : processing
-                  ? existing[is4k ? 'status4k' : 'status'] ===
-                    MediaStatus.DELETED
+                  ? previousStatus === MediaStatus.DELETED
                     ? MediaStatus.DELETED
                     : MediaStatus.PROCESSING
-                  : existing[is4k ? 'status4k' : 'status'];
-          if (mediaAddedAt) {
-            existing.mediaAddedAt = mediaAddedAt;
+                  : previousStatus;
+
+          if (existing[statusField] !== previousStatus) {
+            if (mediaAddedAt) {
+              existing.mediaAddedAt = mediaAddedAt;
+            }
+            changedExisting = true;
           }
-          changedExisting = true;
         }
 
         if (!changedExisting && !existing.mediaAddedAt && mediaAddedAt) {

@@ -33,6 +33,9 @@ class SonarrScanner
   private currentServer: SonarrSettings;
   private sonarrApi: SonarrAPI;
   private scannedTvdbIds: Set<number> = new Set();
+  private scanned4kTvdbIds: Set<number> = new Set();
+  private didScanStandard = false;
+  private didScan4k = false;
 
   constructor() {
     super('Sonarr Scan', { bundleSize: 50 });
@@ -52,6 +55,9 @@ class SonarrScanner
     const settings = getSettings();
     const sessionId = this.startRun();
     this.scannedTvdbIds.clear();
+    this.scanned4kTvdbIds.clear();
+    this.didScanStandard = false;
+    this.didScan4k = false;
 
     try {
       this.servers = uniqWith(settings.sonarr, (sonarrA, sonarrB) => {
@@ -77,6 +83,13 @@ class SonarrScanner
 
           this.items = await this.sonarrApi.getSeries();
 
+          const server4k = this.enable4kShow && server.is4k;
+          if (server4k) {
+            this.didScan4k = true;
+          } else {
+            this.didScanStandard = true;
+          }
+
           await this.loop(this.processSonarrSeries.bind(this), { sessionId });
         } else {
           this.log(`Sync not enabled. Skipping Sonarr server: ${server.name}`);
@@ -93,11 +106,15 @@ class SonarrScanner
   }
 
   private async processSonarrSeries(sonarrSeries: SonarrSeries) {
-    this.scannedTvdbIds.add(sonarrSeries.tvdbId);
+    const server4k = this.enable4kShow && this.currentServer.is4k;
+    if (server4k) {
+      this.scanned4kTvdbIds.add(sonarrSeries.tvdbId);
+    } else {
+      this.scannedTvdbIds.add(sonarrSeries.tvdbId);
+    }
 
     try {
       const mediaRepository = getRepository(Media);
-      const server4k = this.enable4kShow && this.currentServer.is4k;
       const processableSeasons: ProcessableSeason[] = [];
       let tvShow: TmdbTvDetails;
 
@@ -162,35 +179,42 @@ class SonarrScanner
   private async cleanupOrphanedShows(): Promise<void> {
     const mediaRepository = getRepository(Media);
 
-    const processingShows = await mediaRepository.find({
-      where: { mediaType: MediaType.TV, status: MediaStatus.PROCESSING },
-      relations: ['seasons'],
-    });
+    if (this.didScanStandard) {
+      const processingShows = await mediaRepository.find({
+        where: { mediaType: MediaType.TV, status: MediaStatus.PROCESSING },
+        relations: ['seasons'],
+      });
 
-    for (const media of processingShows) {
-      if (media.tvdbId && !this.scannedTvdbIds.has(media.tvdbId)) {
-        media.status = MediaStatus.UNKNOWN;
-        for (const season of media.seasons) {
-          if (season.status === MediaStatus.PROCESSING) {
-            season.status = MediaStatus.UNKNOWN;
+      for (const media of processingShows) {
+        if (media.tvdbId && !this.scannedTvdbIds.has(media.tvdbId)) {
+          media.status = MediaStatus.UNKNOWN;
+          for (const season of media.seasons) {
+            if (season.status === MediaStatus.PROCESSING) {
+              season.status = MediaStatus.UNKNOWN;
+            }
           }
+          await mediaRepository.save(media);
+          this.log(
+            `Show ${media.tmdbId} (tvdb: ${media.tvdbId}) not found in any Sonarr server. Status reset to UNKNOWN.`,
+            'info'
+          );
         }
-        await mediaRepository.save(media);
-        this.log(
-          `Show ${media.tmdbId} (tvdb: ${media.tvdbId}) not found in any Sonarr server. Status reset to UNKNOWN.`,
-          'info'
-        );
       }
+    } else {
+      this.log(
+        'Skipping orphaned show cleanup: no standard Sonarr servers were scanned.',
+        'info'
+      );
     }
 
-    if (this.enable4kShow) {
+    if (this.didScan4k) {
       const processing4kShows = await mediaRepository.find({
         where: { mediaType: MediaType.TV, status4k: MediaStatus.PROCESSING },
         relations: ['seasons'],
       });
 
       for (const media of processing4kShows) {
-        if (media.tvdbId && !this.scannedTvdbIds.has(media.tvdbId)) {
+        if (media.tvdbId && !this.scanned4kTvdbIds.has(media.tvdbId)) {
           media.status4k = MediaStatus.UNKNOWN;
           for (const season of media.seasons) {
             if (season.status4k === MediaStatus.PROCESSING) {
@@ -204,6 +228,11 @@ class SonarrScanner
           );
         }
       }
+    } else if (this.enable4kShow) {
+      this.log(
+        'Skipping orphaned 4K show cleanup: no 4K Sonarr servers were scanned.',
+        'info'
+      );
     }
   }
 }
