@@ -43,23 +43,22 @@ const SettingsLink = ({
 
   let linkClasses =
     'px-1 py-4 ml-8 text-sm font-medium leading-5 transition duration-300 border-b-2 border-transparent whitespace-nowrap first:ml-0';
-  let activeLinkColor = 'text-indigo-500 border-indigo-600';
+  let activeLinkColor = 'text-amber-500 border-amber-600';
   let inactiveLinkColor =
-    'text-gray-500 border-transparent hover:text-gray-300 hover:border-gray-400 focus:text-gray-300 focus:border-gray-400';
+    'text-text-secondary border-transparent hover:text-text-primary hover:border-border focus:text-text-primary focus:border-border';
 
   if (tabType === 'button') {
     linkClasses =
       'px-3 py-2 text-sm font-medium transition duration-300 rounded-md whitespace-nowrap mx-2 my-1';
-    activeLinkColor = 'bg-indigo-700';
-    inactiveLinkColor = 'bg-gray-800 hover:bg-gray-700 focus:bg-gray-700';
+    activeLinkColor = 'bg-amber-700';
+    inactiveLinkColor = 'bg-background-secondary hover:bg-surface focus:bg-surface';
   }
 
   return (
     <Link
       href={route}
-      className={`${linkClasses} ${
-        currentPath.match(regex) ? activeLinkColor : inactiveLinkColor
-      }`}
+      className={`${linkClasses} ${currentPath.match(regex) ? activeLinkColor : inactiveLinkColor
+        }`}
       aria-current="page"
     >
       {children}
@@ -103,10 +102,10 @@ const SettingsTabs = ({
                 !route.hidden &&
                 (route.requiredPermission
                   ? hasPermission(
-                      route.requiredPermission,
-                      currentUser?.permissions ?? 0,
-                      route.permissionType
-                    )
+                    route.requiredPermission,
+                    currentUser?.permissions ?? 0,
+                    route.permissionType
+                  )
                   : true)
             )
             .map((route, index) => (
@@ -142,7 +141,7 @@ const SettingsTabs = ({
           </nav>
         </div>
       ) : (
-        <div className="hide-scrollbar hidden overflow-x-scroll border-b border-gray-600 sm:block">
+        <div className="hide-scrollbar hidden overflow-x-scroll border-b border-border-dark sm:block">
           <nav className="flex" data-testid="settings-nav-desktop">
             {settingsRoutes
               .filter(
@@ -150,10 +149,10 @@ const SettingsTabs = ({
                   !route.hidden &&
                   (route.requiredPermission
                     ? hasPermission(
-                        route.requiredPermission,
-                        currentUser?.permissions ?? 0,
-                        route.permissionType
-                      )
+                      route.requiredPermission,
+                      currentUser?.permissions ?? 0,
+                      route.permissionType
+                    )
                     : true)
               )
               .map((route, index) => (

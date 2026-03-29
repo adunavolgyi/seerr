@@ -187,8 +187,8 @@ const CreateIssueModal = ({
                             {season === 0
                               ? intl.formatMessage(messages.extras)
                               : intl.formatMessage(messages.season, {
-                                  seasonNumber: season,
-                                })}
+                                seasonNumber: season,
+                              })}
                           </option>
                         ))}
                       </Field>
@@ -244,7 +244,7 @@ const CreateIssueModal = ({
               <RadioGroup.Label className="sr-only">
                 Select an Issue
               </RadioGroup.Label>
-              <div className="-space-y-px overflow-hidden rounded-md bg-gray-800/30">
+              <div className="-space-y-px overflow-hidden rounded-md bg-background-secondary/30">
                 {issueOptions.map((setting, index) => (
                   <RadioGroup.Option
                     key={`issue-type-${setting.issueType}`}
@@ -256,8 +256,8 @@ const CreateIssueModal = ({
                           ? 'rounded-bl-md rounded-br-md'
                           : '',
                         checked
-                          ? 'z-10 border border-indigo-500 bg-indigo-400/20'
-                          : 'border-gray-500',
+                          ? 'z-10 border border-amber-500 bg-amber-400/20'
+                          : 'border-border',
                         'relative flex cursor-pointer border p-4 focus:outline-none'
                       )
                     }
@@ -265,13 +265,11 @@ const CreateIssueModal = ({
                     {({ active, checked }) => (
                       <>
                         <span
-                          className={`${
-                            checked
-                              ? 'border-transparent bg-indigo-600'
-                              : 'border-gray-300 bg-white'
-                          } ${
-                            active ? 'ring-2 ring-indigo-300 ring-offset-2' : ''
-                          } mt-0.5 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border`}
+                          className={`${checked
+                            ? 'border-transparent bg-amber-600'
+                            : 'border-text-primary bg-white'
+                            } ${active ? 'ring-2 ring-amber-300 ring-offset-2' : ''
+                            } mt-0.5 flex h-4 w-4 cursor-pointer items-center justify-center rounded-full border`}
                           aria-hidden="true"
                         >
                           <span className="h-1.5 w-1.5 rounded-full bg-white" />
@@ -279,9 +277,8 @@ const CreateIssueModal = ({
                         <div className="ml-3 flex flex-col">
                           <RadioGroup.Label
                             as="span"
-                            className={`block text-sm font-medium ${
-                              checked ? 'text-indigo-100' : 'text-gray-100'
-                            }`}
+                            className={`block text-sm font-medium ${checked ? 'text-amber-100' : 'text-text-primary'
+                              }`}
                           >
                             {intl.formatMessage(setting.name)}
                           </RadioGroup.Label>

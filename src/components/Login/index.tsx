@@ -111,46 +111,46 @@ const Login = () => {
     settings.currentSettings.localLogin;
   const additionalLoginOptions = [
     settings.currentSettings.mediaServerLogin &&
-      (settings.currentSettings.mediaServerType === MediaServerType.PLEX ? (
-        <PlexLoginButton
-          key="plex"
-          isProcessing={isProcessing}
-          onAuthToken={(authToken) => setAuthToken(authToken)}
-          large={!isJellyfin && !settings.currentSettings.localLogin}
-        />
+    (settings.currentSettings.mediaServerType === MediaServerType.PLEX ? (
+      <PlexLoginButton
+        key="plex"
+        isProcessing={isProcessing}
+        onAuthToken={(authToken) => setAuthToken(authToken)}
+        large={!isJellyfin && !settings.currentSettings.localLogin}
+      />
+    ) : (
+      settings.currentSettings.localLogin &&
+      (mediaServerLogin ? (
+        <Button
+          key="seerr"
+          data-testid="seerr-login-button"
+          className="flex-1 bg-transparent"
+          onClick={() => setMediaServerLogin(false)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/os_icon.svg"
+            alt={settings.currentSettings.applicationTitle}
+            className="mr-2 h-5"
+          />
+          <span>{settings.currentSettings.applicationTitle}</span>
+        </Button>
       ) : (
-        settings.currentSettings.localLogin &&
-        (mediaServerLogin ? (
-          <Button
-            key="seerr"
-            data-testid="seerr-login-button"
-            className="flex-1 bg-transparent"
-            onClick={() => setMediaServerLogin(false)}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/os_icon.svg"
-              alt={settings.currentSettings.applicationTitle}
-              className="mr-2 h-5"
-            />
-            <span>{settings.currentSettings.applicationTitle}</span>
-          </Button>
-        ) : (
-          <Button
-            key="mediaserver"
-            data-testid="mediaserver-login-button"
-            className="flex-1 bg-transparent"
-            onClick={() => setMediaServerLogin(true)}
-          >
-            <MediaServerLogo />
-            <span>{mediaServerName}</span>
-          </Button>
-        ))
-      )),
+        <Button
+          key="mediaserver"
+          data-testid="mediaserver-login-button"
+          className="flex-1 bg-transparent"
+          onClick={() => setMediaServerLogin(true)}
+        >
+          <MediaServerLogo />
+          <span>{mediaServerName}</span>
+        </Button>
+      ))
+    )),
   ].filter((o): o is JSX.Element => !!o);
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-gray-900 py-14">
+    <div className="relative flex min-h-screen flex-col bg-background-primary py-14">
       <PageTitle title={intl.formatMessage(messages.signin)} />
       <ImageFader
         backgroundImages={
@@ -164,12 +164,12 @@ const Login = () => {
       </div>
       <div className="relative z-40 mt-10 flex flex-col items-center px-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="relative h-48 w-full max-w-full">
-          <Image src="/logo_stacked.svg" alt="Logo" fill />
+          <Image src="/logo_stacked.svg" alt="Logo" fill className="logo-glow" />
         </div>
       </div>
       <div className="relative z-50 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div
-          className="bg-gray-800/50 shadow sm:rounded-lg"
+          className="border border-gray-600 bg-background-secondary/50 shadow sm:rounded-lg"
           style={{ backdropFilter: 'blur(5px)' }}
         >
           <>
@@ -223,8 +223,8 @@ const Login = () => {
                 >
                   <div ref={loginRef} className="button-container">
                     {isJellyfin &&
-                    (mediaServerLogin ||
-                      !settings.currentSettings.localLogin) ? (
+                      (mediaServerLogin ||
+                        !settings.currentSettings.localLogin) ? (
                       <JellyfinLogin
                         serverType={settings.currentSettings.mediaServerType}
                         revalidate={revalidate}
@@ -241,11 +241,11 @@ const Login = () => {
               {additionalLoginOptions.length > 0 &&
                 (loginFormVisible ? (
                   <div className="flex items-center py-5">
-                    <div className="flex-grow border-t border-gray-600" />
-                    <span className="mx-2 flex-shrink text-sm text-gray-400">
+                    <div className="flex-grow border-t border-border-dark" />
+                    <span className="mx-2 flex-shrink text-sm text-text-secondary">
                       {intl.formatMessage(messages.orsigninwith)}
                     </span>
-                    <div className="flex-grow border-t border-gray-600" />
+                    <div className="flex-grow border-t border-border-dark" />
                   </div>
                 ) : (
                   <h2 className="mb-6 text-center text-lg font-bold text-neutral-200">
@@ -254,9 +254,8 @@ const Login = () => {
                 ))}
 
               <div
-                className={`flex w-full flex-wrap gap-2 ${
-                  !loginFormVisible ? 'flex-col' : ''
-                }`}
+                className={`flex w-full flex-wrap gap-2 ${!loginFormVisible ? 'flex-col' : ''
+                  }`}
               >
                 {additionalLoginOptions}
               </div>

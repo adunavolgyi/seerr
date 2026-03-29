@@ -17,11 +17,10 @@ const NotificationType = ({
   return (
     <>
       <div
-        className={`relative mt-4 flex items-start first:mt-0 ${
-          !!parent?.value && hasNotificationType(parent.value, currentTypes)
+        className={`relative mt-4 flex items-start first:mt-0 ${!!parent?.value && hasNotificationType(parent.value, currentTypes)
             ? 'opacity-50'
             : ''
-        }`}
+          }`}
       >
         <div className="flex h-6 items-center">
           <input
@@ -49,7 +48,7 @@ const NotificationType = ({
           <label htmlFor={option.id} className="block" aria-label={option.name}>
             <div className="flex flex-col">
               <span className="font-medium text-white">{option.name}</span>
-              <span className="font-normal text-gray-400">
+              <span className="font-normal text-text-secondary">
                 {option.description}
               </span>
             </div>

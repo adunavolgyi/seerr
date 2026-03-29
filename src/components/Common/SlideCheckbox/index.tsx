@@ -21,15 +21,13 @@ const SlideCheckbox = ({ onClick, checked = false }: SlideCheckboxProps) => {
     >
       <span
         aria-hidden="true"
-        className={`${
-          checked ? 'bg-indigo-500' : 'bg-gray-700'
-        } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
+        className={`${checked ? 'bg-amber-500' : 'bg-surface'
+          } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
       />
       <span
         aria-hidden="true"
-        className={`${
-          checked ? 'translate-x-5' : 'translate-x-0'
-        } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-blue-300 group-focus:ring`}
+        className={`${checked ? 'translate-x-5' : 'translate-x-0'
+          } absolute left-0 inline-block h-5 w-5 rounded-full border border-border-light bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-amber-300 group-focus:ring`}
       />
     </span>
   );

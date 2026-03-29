@@ -149,15 +149,13 @@ const PlexImportModal = ({ onCancel, onComplete }: PlexImportProps) => {
                           >
                             <span
                               aria-hidden="true"
-                              className={`${
-                                isAllUsers() ? 'bg-indigo-500' : 'bg-gray-800'
-                              } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
+                              className={`${isAllUsers() ? 'bg-amber-500' : 'bg-gray-800'
+                                } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
                             />
                             <span
                               aria-hidden="true"
-                              className={`${
-                                isAllUsers() ? 'translate-x-5' : 'translate-x-0'
-                              } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-blue-300 group-focus:ring`}
+                              className={`${isAllUsers() ? 'translate-x-5' : 'translate-x-0'
+                                } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-amber-300 group-focus:ring`}
                             />
                           </span>
                         </th>
@@ -184,19 +182,17 @@ const PlexImportModal = ({ onCancel, onComplete }: PlexImportProps) => {
                             >
                               <span
                                 aria-hidden="true"
-                                className={`${
-                                  isSelectedUser(user.id)
-                                    ? 'bg-indigo-500'
-                                    : 'bg-gray-800'
-                                } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
+                                className={`${isSelectedUser(user.id)
+                                  ? 'bg-amber-500'
+                                  : 'bg-gray-800'
+                                  } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
                               />
                               <span
                                 aria-hidden="true"
-                                className={`${
-                                  isSelectedUser(user.id)
-                                    ? 'translate-x-5'
-                                    : 'translate-x-0'
-                                } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-blue-300 group-focus:ring`}
+                                className={`${isSelectedUser(user.id)
+                                  ? 'translate-x-5'
+                                  : 'translate-x-0'
+                                  } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-amber-300 group-focus:ring`}
                               />
                             </span>
                           </td>
@@ -215,7 +211,7 @@ const PlexImportModal = ({ onCancel, onComplete }: PlexImportProps) => {
                                 </div>
                                 {user.username &&
                                   user.username.toLowerCase() !==
-                                    user.email && (
+                                  user.email && (
                                     <div className="text-sm leading-5 text-gray-300">
                                       {user.email}
                                     </div>

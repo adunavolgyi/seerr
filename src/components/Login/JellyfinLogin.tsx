@@ -126,7 +126,7 @@ const JellyfinLogin: React.FC<JellyfinLoginProps> = ({
                         name="username"
                         type="text"
                         placeholder={intl.formatMessage(messages.username)}
-                        className="!bg-gray-700/80 placeholder:text-gray-400"
+                        className="!bg-surface/80 placeholder:text-text-secondary"
                         data-form-type="username"
                       />
                     </div>
@@ -144,7 +144,7 @@ const JellyfinLogin: React.FC<JellyfinLoginProps> = ({
                         type="password"
                         autoComplete="current-password"
                         placeholder={intl.formatMessage(messages.password)}
-                        className="!bg-gray-700/80 placeholder:text-gray-400"
+                        className="!bg-surface/80 placeholder:text-text-secondary"
                         data-form-type="password"
                         data-1pignore="false"
                         data-lpignore="false"
@@ -160,14 +160,13 @@ const JellyfinLogin: React.FC<JellyfinLoginProps> = ({
                           href={
                             jellyfinForgotPasswordUrl
                               ? `${jellyfinForgotPasswordUrl}`
-                              : `${baseUrl}/web/index.html#!/${
-                                  settings.currentSettings.mediaServerType ===
-                                  MediaServerType.EMBY
-                                    ? 'startup/'
-                                    : ''
-                                }forgotpassword.html`
+                              : `${baseUrl}/web/index.html#!/${settings.currentSettings.mediaServerType ===
+                                MediaServerType.EMBY
+                                ? 'startup/'
+                                : ''
+                              }forgotpassword.html`
                           }
-                          className="pt-2 text-sm text-indigo-500 hover:text-indigo-400"
+                          className="pt-2 text-sm text-amber-500 hover:text-amber-400"
                         >
                           {intl.formatMessage(messages.forgotpassword)}
                         </a>

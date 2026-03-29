@@ -52,7 +52,7 @@ function Button<P extends ElementTypes = 'button'>(
   switch (buttonType) {
     case 'primary':
       buttonStyle.push(
-        'text-white border border-indigo-500 bg-indigo-600/80 hover:bg-indigo-600 hover:border-indigo-500 focus:border-indigo-700 focus:ring-indigo active:bg-indigo-600 active:border-indigo-700'
+        'text-white border border-amber-500 bg-amber-600/80 hover:bg-amber-600 hover:border-amber-500 focus:border-amber-700 focus:ring-amber active:bg-amber-600 active:border-amber-700'
       );
       break;
     case 'danger':
@@ -72,12 +72,12 @@ function Button<P extends ElementTypes = 'button'>(
       break;
     case 'ghost':
       buttonStyle.push(
-        'text-white bg-transparent border-gray-600 hover:border-gray-200 focus:border-gray-100 active:border-gray-100'
+        'text-white bg-transparent border-border-dark hover:border-text-primary focus:border-text-primary active:border-text-primary'
       );
       break;
     default:
       buttonStyle.push(
-        'text-gray-200 bg-gray-800/80 border-gray-600 hover:text-white hover:bg-gray-700 hover:border-gray-600 group-hover:text-white group-hover:bg-gray-700 group-hover:border-gray-600 focus:border-blue-300 focus:ring-blue active:text-gray-200 active:bg-gray-700 active:border-gray-600'
+        'text-text-primary bg-background-secondary/80 border-border-dark hover:text-white hover:bg-surface hover:border-border-dark group-hover:text-white group-hover:bg-surface group-hover:border-border-dark focus:border-amber-300 focus:ring-amber active:text-text-primary active:bg-surface active:border-border-dark'
       );
   }
 

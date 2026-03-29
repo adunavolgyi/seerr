@@ -44,7 +44,7 @@ const ProfileHeader = ({ user, isSettingsPage }: ProfileHeaderProps) => {
           <div className="relative">
             <CachedImage
               type="avatar"
-              className="h-24 w-24 rounded-full bg-gray-600 object-cover ring-1 ring-gray-700"
+              className="h-24 w-24 rounded-full bg-background-secondary object-cover ring-1 ring-border"
               src={user.avatar}
               alt=""
               width={96}
@@ -62,17 +62,17 @@ const ProfileHeader = ({ user, isSettingsPage }: ProfileHeaderProps) => {
               href={
                 user.id === loggedInUser?.id ? '/profile' : `/users/${user.id}`
               }
-              className="text-overseerr text-lg font-bold hover:to-purple-200 sm:text-2xl"
+              className="text-overseerr text-lg font-bold hover:to-amber-200 sm:text-2xl"
             >
               {user.displayName}
             </Link>
             {user.email && user.displayName.toLowerCase() !== user.email && (
-              <span className="text-sm text-gray-400 sm:ml-2 sm:text-lg">
+              <span className="text-sm text-text-secondary sm:ml-2 sm:text-lg">
                 ({user.email})
               </span>
             )}
           </h1>
-          <p className="text-sm font-medium text-gray-400">
+          <p className="text-sm font-medium text-text-secondary">
             {subtextItems.reduce((prev, curr) => (
               <>
                 {prev} | {curr}
@@ -84,7 +84,7 @@ const ProfileHeader = ({ user, isSettingsPage }: ProfileHeaderProps) => {
       <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse lg:flex-row lg:justify-end lg:space-x-3 lg:space-y-0 lg:space-x-reverse">
         {(loggedInUser?.id === user.id ||
           (user.id !== 1 && hasPermission(Permission.MANAGE_USERS))) &&
-        !isSettingsPage ? (
+          !isSettingsPage ? (
           <Link
             href={
               loggedInUser?.id === user.id

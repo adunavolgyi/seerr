@@ -395,8 +395,7 @@ export const WatchProviderSelector = ({
     activeProviders ?? []
   );
   const { data, isLoading } = useSWR<WatchProviderDetails[]>(
-    `/api/v1/watchproviders/${
-      type === 'movie' ? 'movies' : 'tv'
+    `/api/v1/watchproviders/${type === 'movie' ? 'movies' : 'tv'
     }?watchRegion=${watchRegion}`
   );
 
@@ -452,11 +451,10 @@ export const WatchProviderSelector = ({
                   key={`prodiver-${provider.id}`}
                 >
                   <div
-                    className={`provider-container w-full cursor-pointer rounded-lg ring-1 ${
-                      isActive
-                        ? 'bg-gray-600 ring-indigo-500 hover:bg-gray-500'
-                        : 'bg-gray-700 ring-gray-500 hover:bg-gray-600'
-                    }`}
+                    className={`provider-container w-full cursor-pointer rounded-lg ring-1 ${isActive
+                      ? 'bg-gray-600 ring-amber-500 hover:bg-gray-500'
+                      : 'bg-gray-700 ring-gray-500 hover:bg-gray-600'
+                      }`}
                     onClick={() => toggleProvider(provider.id)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -476,7 +474,7 @@ export const WatchProviderSelector = ({
                       />
                     </div>
                     {isActive && (
-                      <div className="pointer-events-none absolute -left-1 -top-1 flex items-center justify-center text-indigo-100 opacity-90">
+                      <div className="pointer-events-none absolute -left-1 -top-1 flex items-center justify-center text-amber-100 opacity-90">
                         <CheckCircleIcon className="h-6 w-6" />
                       </div>
                     )}
@@ -495,11 +493,10 @@ export const WatchProviderSelector = ({
                     key={`prodiver-${provider.id}`}
                   >
                     <div
-                      className={`provider-container w-full cursor-pointer rounded-lg ring-1 transition ${
-                        isActive
-                          ? 'bg-gray-600 ring-indigo-500 hover:bg-gray-500'
-                          : 'bg-gray-700 ring-gray-500 hover:bg-gray-600'
-                      }`}
+                      className={`provider-container w-full cursor-pointer rounded-lg ring-1 transition ${isActive
+                        ? 'bg-gray-600 ring-amber-500 hover:bg-gray-500'
+                        : 'bg-gray-700 ring-gray-500 hover:bg-gray-600'
+                        }`}
                       onClick={() => toggleProvider(provider.id)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
@@ -519,7 +516,7 @@ export const WatchProviderSelector = ({
                         />
                       </div>
                       {isActive && (
-                        <div className="pointer-events-none absolute -left-1 -top-1 flex items-center justify-center text-indigo-100 opacity-90">
+                        <div className="pointer-events-none absolute -left-1 -top-1 flex items-center justify-center text-amber-100 opacity-90">
                           <CheckCircleIcon className="h-6 w-6" />
                         </div>
                       )}

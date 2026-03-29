@@ -27,7 +27,7 @@ const IssueBlock = ({ issue }: IssueBlockProps) => {
   }
 
   return (
-    <div className="px-4 py-3 text-gray-300">
+    <div className="px-4 py-3 text-text-secondary">
       <div className="flex items-center justify-between">
         <div className="mr-6 min-w-0 flex-1 flex-col items-center text-sm leading-5">
           <div className="flex flex-nowrap">
@@ -45,7 +45,7 @@ const IssueBlock = ({ issue }: IssueBlockProps) => {
                     ? '/profile'
                     : `/users/${issue.createdBy.id}`
                 }
-                className="font-semibold text-gray-100 transition duration-300 hover:text-white hover:underline"
+                className="font-semibold text-text-primary transition duration-300 hover:text-white hover:underline"
               >
                 {issue.createdBy.displayName}
               </Link>

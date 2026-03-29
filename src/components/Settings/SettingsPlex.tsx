@@ -460,11 +460,11 @@ const SettingsPlex = ({ onComplete }: SettingsPlexProps) => {
                         {availableServers || isRefreshingPresets
                           ? isRefreshingPresets
                             ? intl.formatMessage(
-                                messages.serverpresetRefreshing
-                              )
+                              messages.serverpresetRefreshing
+                            )
                             : intl.formatMessage(
-                                messages.serverpresetManualMessage
-                              )
+                              messages.serverpresetManualMessage
+                            )
                           : intl.formatMessage(messages.serverpresetLoad)}
                       </option>
                       {availablePresets.map((server, index) => (
@@ -475,16 +475,14 @@ const SettingsPlex = ({ onComplete }: SettingsPlexProps) => {
                         >
                           {`
                             ${server.name} (${server.address})
-                            [${
-                              server.local
-                                ? intl.formatMessage(messages.serverLocal)
-                                : intl.formatMessage(messages.serverRemote)
-                            }]${
-                              server.ssl
-                                ? ` [${intl.formatMessage(
-                                    messages.serverSecure
-                                  )}]`
-                                : ''
+                            [${server.local
+                              ? intl.formatMessage(messages.serverLocal)
+                              : intl.formatMessage(messages.serverRemote)
+                            }]${server.ssl
+                              ? ` [${intl.formatMessage(
+                                messages.serverSecure
+                              )}]`
+                              : ''
                             }
                             ${server.status ? '' : '(' + server.message + ')'}
                           `}
@@ -668,7 +666,7 @@ const SettingsPlex = ({ onComplete }: SettingsPlexProps) => {
           <div className="relative mb-6 h-8 w-full overflow-hidden rounded-full bg-gray-600">
             {dataSync?.running && (
               <div
-                className="h-8 bg-indigo-600 transition-all duration-200 ease-in-out"
+                className="h-8 bg-amber-600 transition-all duration-200 ease-in-out"
                 style={{
                   width: `${Math.round(
                     (dataSync.progress / dataSync.total) * 100
@@ -701,11 +699,11 @@ const SettingsPlex = ({ onComplete }: SettingsPlexProps) => {
                     {intl.formatMessage(messages.librariesRemaining, {
                       count: dataSync.currentLibrary
                         ? dataSync.libraries.slice(
-                            dataSync.libraries.findIndex(
-                              (library) =>
-                                library.id === dataSync.currentLibrary?.id
-                            ) + 1
-                          ).length
+                          dataSync.libraries.findIndex(
+                            (library) =>
+                              library.id === dataSync.currentLibrary?.id
+                          ) + 1
+                        ).length
                         : 0,
                     })}
                   </Badge>

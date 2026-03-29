@@ -76,10 +76,8 @@ const Blocklist = () => {
     error,
     mutate: revalidate,
   } = useSWR<BlocklistResultsResponse>(
-    `/api/v1/blocklist/?take=${currentPageSize}&skip=${
-      pageIndex * currentPageSize
-    }&filter=${currentFilter}${
-      debouncedSearchFilter ? `&search=${debouncedSearchFilter}` : ''
+    `/api/v1/blocklist/?take=${currentPageSize}&skip=${pageIndex * currentPageSize
+    }&filter=${currentFilter}${debouncedSearchFilter ? `&search=${debouncedSearchFilter}` : ''
     }`,
     {
       refreshInterval: 0,
@@ -113,7 +111,7 @@ const Blocklist = () => {
 
         <div className="mt-2 flex flex-grow flex-col sm:flex-row lg:flex-grow-0">
           <div className="mb-2 flex flex-grow sm:mb-0 sm:mr-2 lg:flex-grow-0">
-            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-500 bg-gray-800 px-3 text-sm text-gray-100">
+            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-border-light bg-background-secondary px-3 text-sm text-text-primary">
               <FunnelIcon className="h-6 w-6" />
             </span>
             <select
@@ -144,7 +142,7 @@ const Blocklist = () => {
           </div>
 
           <div className="mb-2 flex flex-grow sm:mb-0 sm:mr-2 md:flex-grow-0">
-            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-500 bg-gray-800 px-3 text-sm text-gray-100">
+            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-border-light bg-background-secondary px-3 text-sm text-text-primary">
               <MagnifyingGlassIcon className="h-6 w-6" />
             </span>
             <input
@@ -154,14 +152,14 @@ const Blocklist = () => {
               onChange={(e) => searchItem(e)}
             />
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
 
       {!data ? (
         <LoadingSpinner />
       ) : data.results.length === 0 ? (
         <div className="flex w-full flex-col items-center justify-center py-24 text-white">
-          <span className="text-2xl text-gray-400">
+          <span className="text-2xl text-text-secondary">
             {intl.formatMessage(globalMessages.noresults)}
           </span>
           {currentFilter !== Filter.ALL && (
@@ -183,7 +181,8 @@ const Blocklist = () => {
             </div>
           );
         })
-      )}
+      )
+      }
 
       <div className="actions">
         <nav
@@ -287,7 +286,7 @@ const BlocklistedItem = ({ item, revalidateList }: BlocklistedItemProps) => {
   if (!title && !error) {
     return (
       <div
-        className="h-64 w-full animate-pulse rounded-xl bg-gray-800 xl:h-28"
+        className="h-64 w-full animate-pulse rounded-xl bg-surface xl:h-28"
         ref={ref}
       />
     );
@@ -320,7 +319,7 @@ const BlocklistedItem = ({ item, revalidateList }: BlocklistedItemProps) => {
   };
 
   return (
-    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-gray-800 py-4 text-gray-400 shadow-md ring-1 ring-gray-700 xl:h-28 xl:flex-row">
+    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-background-secondary py-4 text-text-secondary shadow-md ring-1 ring-border xl:h-28 xl:flex-row">
       {title && title.backdropPath && (
         <div className="absolute inset-0 z-0 w-full bg-cover bg-center xl:w-2/3">
           <CachedImage
@@ -398,7 +397,7 @@ const BlocklistedItem = ({ item, revalidateList }: BlocklistedItemProps) => {
               <span className="card-field-name">
                 {intl.formatMessage(globalMessages.blocklisted)}
               </span>
-              <span className="flex truncate text-sm text-gray-300">
+              <span className="flex truncate text-sm text-text-primary">
                 {intl.formatMessage(messages.blocklistedby, {
                   date: (
                     <FormattedRelativeTime
@@ -441,13 +440,13 @@ const BlocklistedItem = ({ item, revalidateList }: BlocklistedItemProps) => {
           )}
           <div className="card-field">
             {item.mediaType === 'movie' ? (
-              <div className="pointer-events-none z-40 self-start rounded-full border border-blue-500 bg-blue-600/80 shadow-md">
+              <div className="pointer-events-none z-40 self-start rounded-full border border-amber-500 bg-amber-600/80 shadow-md">
                 <div className="flex h-4 items-center px-2 py-2 text-center text-xs font-medium uppercase tracking-wider text-white sm:h-5">
                   {intl.formatMessage(globalMessages.movie)}
                 </div>
               </div>
             ) : (
-              <div className="pointer-events-none z-40 self-start rounded-full border border-purple-600 bg-purple-600/80 shadow-md">
+              <div className="pointer-events-none z-40 self-start rounded-full border border-amber-600 bg-amber-600/80 shadow-md">
                 <div className="flex h-4 items-center px-2 py-2 text-center text-xs font-medium uppercase tracking-wider text-white sm:h-5">
                   {intl.formatMessage(globalMessages.tvshow)}
                 </div>
@@ -468,9 +467,8 @@ const BlocklistedItem = ({ item, revalidateList }: BlocklistedItemProps) => {
             confirmText={intl.formatMessage(
               isUpdating ? globalMessages.deleting : globalMessages.areyousure
             )}
-            className={`w-full ${
-              isUpdating ? 'pointer-events-none opacity-50' : ''
-            }`}
+            className={`w-full ${isUpdating ? 'pointer-events-none opacity-50' : ''
+              }`}
           >
             <TrashIcon />
             <span>

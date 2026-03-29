@@ -45,8 +45,7 @@ const IssueList = () => {
   const updateQueryParams = useUpdateQueryParams({ page: page.toString() });
 
   const { data, error } = useSWR<IssueResultsResponse>(
-    `/api/v1/issue?take=${currentPageSize}&skip=${
-      pageIndex * currentPageSize
+    `/api/v1/issue?take=${currentPageSize}&skip=${pageIndex * currentPageSize
     }&filter=${currentFilter}&sort=${currentSort}`
   );
 
@@ -98,7 +97,7 @@ const IssueList = () => {
         <Header>{intl.formatMessage(messages.issues)}</Header>
         <div className="mt-2 flex flex-grow flex-col sm:flex-row lg:flex-grow-0">
           <div className="mb-2 flex flex-grow sm:mb-0 sm:mr-2 lg:flex-grow-0">
-            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-500 bg-gray-800 px-3 text-sm text-gray-100">
+            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-border-light bg-background-secondary px-3 text-sm text-text-primary">
               <FunnelIcon className="h-6 w-6" />
             </span>
             <select
@@ -128,7 +127,7 @@ const IssueList = () => {
             </select>
           </div>
           <div className="mb-2 flex flex-grow sm:mb-0 lg:flex-grow-0">
-            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-500 bg-gray-800 px-3 text-gray-100 sm:text-sm">
+            <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-border-light bg-background-secondary px-3 text-text-primary sm:text-sm">
               <BarsArrowDownIcon className="h-6 w-6" />
             </span>
             <select
@@ -165,7 +164,7 @@ const IssueList = () => {
       })}
       {data.results.length === 0 && (
         <div className="flex w-full flex-col items-center justify-center py-24 text-white">
-          <span className="text-2xl text-gray-400">
+          <span className="text-2xl text-text-secondary">
             {intl.formatMessage(globalMessages.noresults)}
           </span>
           {currentFilter !== Filter.ALL && (

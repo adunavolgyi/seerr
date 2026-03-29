@@ -37,7 +37,7 @@ const IssueDescription = ({
   return (
     <div className="relative">
       <div className="flex items-center justify-between">
-        <div className="font-semibold text-gray-100 lg:text-xl">
+        <div className="font-semibold text-text-primary lg:text-xl">
           {intl.formatMessage(messages.description)}
         </div>
         {(hasPermission(Permission.MANAGE_ISSUES) || belongsToUser) && (
@@ -45,7 +45,7 @@ const IssueDescription = ({
             {({ open }) => (
               <>
                 <div>
-                  <Menu.Button className="flex items-center rounded-full text-gray-400 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                  <Menu.Button className="flex items-center rounded-full text-text-secondary hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-accent">
                     <span className="sr-only">Open options</span>
                     <EllipsisVerticalIcon
                       className="h-5 w-5"
@@ -66,7 +66,7 @@ const IssueDescription = ({
                 >
                   <Menu.Items
                     static
-                    className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-surface shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                   >
                     <div className="py-1">
                       {belongsToUser && (
@@ -74,11 +74,10 @@ const IssueDescription = ({
                           {({ active }) => (
                             <button
                               onClick={() => setIsEditing(true)}
-                              className={`block w-full px-4 py-2 text-left text-sm ${
-                                active
-                                  ? 'bg-gray-600 text-white'
-                                  : 'text-gray-100'
-                              }`}
+                              className={`block w-full px-4 py-2 text-left text-sm ${active
+                                ? 'bg-surface/70 text-white'
+                                : 'text-text-primary'
+                                }`}
                             >
                               {intl.formatMessage(messages.edit)}
                             </button>
@@ -87,21 +86,20 @@ const IssueDescription = ({
                       )}
                       {(hasPermission(Permission.MANAGE_ISSUES) ||
                         !commentCount) && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => onDelete()}
-                              className={`block w-full px-4 py-2 text-left text-sm ${
-                                active
-                                  ? 'bg-gray-600 text-white'
-                                  : 'text-gray-100'
-                              }`}
-                            >
-                              {intl.formatMessage(messages.deleteissue)}
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => onDelete()}
+                                className={`block w-full px-4 py-2 text-left text-sm ${active
+                                  ? 'bg-surface/70 text-white'
+                                  : 'text-text-primary'
+                                  }`}
+                              >
+                                {intl.formatMessage(messages.deleteissue)}
+                              </button>
+                            )}
+                          </Menu.Item>
+                        )}
                     </div>
                   </Menu.Items>
                 </Transition>

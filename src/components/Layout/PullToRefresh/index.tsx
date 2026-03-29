@@ -115,15 +115,13 @@ const PullToRefresh = () => {
       }}
     >
       <div
-        className={`${
-          refreshDiv.current?.classList.contains('loading') && 'animate-spin'
-        } relative -top-28 h-9 w-9 rounded-full border-4 border-gray-800 bg-gray-800 shadow-md shadow-black ring-1 ring-gray-700`}
+        className={`${refreshDiv.current?.classList.contains('loading') && 'animate-spin'
+          } relative -top-28 h-9 w-9 rounded-full border-4 border-gray-950 bg-gray-950 shadow-md shadow-black ring-1 ring-gray-800`}
         style={{ animationDirection: 'reverse' }}
       >
         <ArrowPathIcon
-          className={`rounded-full ${
-            pullDownReloadThreshold && 'rotate-180'
-          } text-indigo-500 transition-all duration-300`}
+          className={`rounded-full ${pullDownReloadThreshold && 'rotate-180'
+            } text-amber-500 transition-all duration-300`}
         />
       </div>
     </div>

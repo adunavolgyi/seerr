@@ -14,7 +14,7 @@ const ProgressCircle = ({
   const ref = useRef<SVGCircleElement>(null);
 
   let color = '';
-  let emptyColor = 'text-gray-300';
+  let emptyColor = 'text-text-secondary';
 
   if (useHeatLevel) {
     color = 'text-green-500';

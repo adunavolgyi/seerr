@@ -126,8 +126,8 @@ const Discover = () => {
       {hasPermission(Permission.ADMIN) && (
         <>
           {isEditing && (
-            <div className="my-6 rounded-lg bg-gray-800">
-              <div className="flex items-center space-x-2 rounded-t-lg border-l border-r border-t border-gray-800 bg-gray-900 p-4 text-lg font-semibold text-gray-400">
+            <div className="my-6 rounded-lg bg-background-secondary">
+              <div className="flex items-center space-x-2 rounded-t-lg border-l border-r border-t border-background-secondary bg-background-primary p-4 text-lg font-semibold text-text-secondary">
                 <PlusIcon className="w-6" />
                 <span data-testid="create-slider-header">
                   {intl.formatMessage(messages.createnewslider)}
@@ -159,9 +159,9 @@ const Discover = () => {
             <button
               onClick={() => setIsEditing(true)}
               data-testid="discover-start-editing"
-              className="h-12 w-12 rounded-full border-2 border-gray-600 bg-gray-700/90 p-3 text-gray-400 shadow transition-all hover:bg-gray-700"
+              className="h-12 w-12 rounded-full border-2 border-border-dark bg-surface/90 p-3 text-text-secondary shadow transition-all hover:bg-surface"
             >
-              <PencilIcon className="h-full w-full" />
+              <PencilIcon className="h-full w-full\" />
             </button>
           </Transition>
           <Transition
@@ -172,7 +172,7 @@ const Discover = () => {
             leave="transition duration-300"
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-6"
-            className="safe-shift-edit-menu fixed left-0 right-0 z-50 flex flex-col items-center justify-end space-x-0 space-y-2 border-t border-gray-700 bg-gray-800/80 p-4 backdrop-blur sm:bottom-0 sm:flex-row sm:space-x-3 sm:space-y-0"
+            className="safe-shift-edit-menu fixed left-0 right-0 z-50 flex flex-col items-center justify-end space-x-0 space-y-2 border-t border-border bg-background-secondary/80 p-4 backdrop-blur sm:bottom-0 sm:flex-row sm:space-x-3 sm:space-y-0"
           >
             <Button
               buttonType="default"
@@ -203,234 +203,232 @@ const Discover = () => {
               <ArrowDownOnSquareIcon />
               <span>{intl.formatMessage(globalMessages.save)}</span>
             </Button>
-          </Transition>
+          </Transition >
         </>
-      )}
-      {(isEditing ? sliders : discoverData)?.map((slider, index) => {
-        let sliderComponent: React.ReactNode;
+      )
+      }
+      {
+        (isEditing ? sliders : discoverData)?.map((slider, index) => {
+          let sliderComponent: React.ReactNode;
 
-        switch (slider.type) {
-          case DiscoverSliderType.RECENTLY_ADDED:
-            sliderComponent = <RecentlyAddedSlider />;
-            break;
-          case DiscoverSliderType.RECENT_REQUESTS:
-            sliderComponent = <RecentRequestsSlider />;
-            break;
-          case DiscoverSliderType.PLEX_WATCHLIST:
-            sliderComponent = <PlexWatchlistSlider />;
-            break;
-          case DiscoverSliderType.TRENDING:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey="trending"
-                title={intl.formatMessage(sliderTitles.trending)}
-                url="/api/v1/discover/trending"
-                linkUrl="/discover/trending"
-              />
-            );
-            break;
-          case DiscoverSliderType.POPULAR_MOVIES:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey="popular-movies"
-                title={intl.formatMessage(sliderTitles.popularmovies)}
-                url="/api/v1/discover/movies"
-                linkUrl="/discover/movies"
-              />
-            );
-            break;
-          case DiscoverSliderType.MOVIE_GENRES:
-            sliderComponent = <MovieGenreSlider />;
-            break;
-          case DiscoverSliderType.UPCOMING_MOVIES:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey="upcoming"
-                title={intl.formatMessage(sliderTitles.upcoming)}
-                linkUrl={`/discover/movies?primaryReleaseDateGte=${upcomingDate}`}
-                url="/api/v1/discover/movies"
-                extraParams={`primaryReleaseDateGte=${upcomingDate}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.STUDIOS:
-            sliderComponent = <StudioSlider />;
-            break;
-          case DiscoverSliderType.POPULAR_TV:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey="popular-tv"
-                title={intl.formatMessage(sliderTitles.populartv)}
-                url="/api/v1/discover/tv"
-                linkUrl="/discover/tv"
-              />
-            );
-            break;
-          case DiscoverSliderType.TV_GENRES:
-            sliderComponent = <TvGenreSlider />;
-            break;
-          case DiscoverSliderType.UPCOMING_TV:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey="upcoming-tv"
-                title={intl.formatMessage(sliderTitles.upcomingtv)}
-                linkUrl={`/discover/tv?firstAirDateGte=${upcomingDate}`}
-                url="/api/v1/discover/tv"
-                extraParams={`firstAirDateGte=${upcomingDate}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.NETWORKS:
-            sliderComponent = <NetworkSlider />;
-            break;
-          case DiscoverSliderType.TMDB_MOVIE_KEYWORD:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url="/api/v1/discover/movies"
-                extraParams={
-                  slider.data
-                    ? `keywords=${encodeURIExtraParams(slider.data)}`
-                    : ''
-                }
-                linkUrl={`/discover/movies?keywords=${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_TV_KEYWORD:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url="/api/v1/discover/tv"
-                extraParams={
-                  slider.data
-                    ? `keywords=${encodeURIExtraParams(slider.data)}`
-                    : ''
-                }
-                linkUrl={`/discover/tv?keywords=${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_MOVIE_GENRE:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url={`/api/v1/discover/movies`}
-                extraParams={`genre=${slider.data}`}
-                linkUrl={`/discover/movies?genre=${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_TV_GENRE:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url={`/api/v1/discover/tv`}
-                extraParams={`genre=${slider.data}`}
-                linkUrl={`/discover/tv?genre=${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_STUDIO:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url={`/api/v1/discover/movies/studio/${slider.data}`}
-                linkUrl={`/discover/movies/studio/${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_NETWORK:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url={`/api/v1/discover/tv/network/${slider.data}`}
-                linkUrl={`/discover/tv/network/${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_SEARCH:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url="/api/v1/search"
-                extraParams={`query=${slider.data}`}
-                linkUrl={`/search?query=${slider.data}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_MOVIE_STREAMING_SERVICES:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url="/api/v1/discover/movies"
-                extraParams={`watchRegion=${
-                  slider.data?.split(',')[0]
-                }&watchProviders=${slider.data?.split(',')[1]}`}
-                linkUrl={`/discover/movies?watchRegion=${
-                  slider.data?.split(',')[0]
-                }&watchProviders=${slider.data?.split(',')[1]}`}
-              />
-            );
-            break;
-          case DiscoverSliderType.TMDB_TV_STREAMING_SERVICES:
-            sliderComponent = (
-              <MediaSlider
-                sliderKey={`custom-slider-${slider.id}`}
-                title={slider.title ?? ''}
-                url="/api/v1/discover/tv"
-                extraParams={`watchRegion=${
-                  slider.data?.split(',')[0]
-                }&watchProviders=${slider.data?.split(',')[1]}`}
-                linkUrl={`/discover/tv?watchRegion=${
-                  slider.data?.split(',')[0]
-                }&watchProviders=${slider.data?.split(',')[1]}`}
-              />
-            );
-            break;
-        }
+          switch (slider.type) {
+            case DiscoverSliderType.RECENTLY_ADDED:
+              sliderComponent = <RecentlyAddedSlider />;
+              break;
+            case DiscoverSliderType.RECENT_REQUESTS:
+              sliderComponent = <RecentRequestsSlider />;
+              break;
+            case DiscoverSliderType.PLEX_WATCHLIST:
+              sliderComponent = <PlexWatchlistSlider />;
+              break;
+            case DiscoverSliderType.TRENDING:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey="trending"
+                  title={intl.formatMessage(sliderTitles.trending)}
+                  url="/api/v1/discover/trending"
+                  linkUrl="/discover/trending"
+                />
+              );
+              break;
+            case DiscoverSliderType.POPULAR_MOVIES:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey="popular-movies"
+                  title={intl.formatMessage(sliderTitles.popularmovies)}
+                  url="/api/v1/discover/movies"
+                  linkUrl="/discover/movies"
+                />
+              );
+              break;
+            case DiscoverSliderType.MOVIE_GENRES:
+              sliderComponent = <MovieGenreSlider />;
+              break;
+            case DiscoverSliderType.UPCOMING_MOVIES:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey="upcoming"
+                  title={intl.formatMessage(sliderTitles.upcoming)}
+                  linkUrl={`/discover/movies?primaryReleaseDateGte=${upcomingDate}`}
+                  url="/api/v1/discover/movies"
+                  extraParams={`primaryReleaseDateGte=${upcomingDate}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.STUDIOS:
+              sliderComponent = <StudioSlider />;
+              break;
+            case DiscoverSliderType.POPULAR_TV:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey="popular-tv"
+                  title={intl.formatMessage(sliderTitles.populartv)}
+                  url="/api/v1/discover/tv"
+                  linkUrl="/discover/tv"
+                />
+              );
+              break;
+            case DiscoverSliderType.TV_GENRES:
+              sliderComponent = <TvGenreSlider />;
+              break;
+            case DiscoverSliderType.UPCOMING_TV:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey="upcoming-tv"
+                  title={intl.formatMessage(sliderTitles.upcomingtv)}
+                  linkUrl={`/discover/tv?firstAirDateGte=${upcomingDate}`}
+                  url="/api/v1/discover/tv"
+                  extraParams={`firstAirDateGte=${upcomingDate}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.NETWORKS:
+              sliderComponent = <NetworkSlider />;
+              break;
+            case DiscoverSliderType.TMDB_MOVIE_KEYWORD:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url="/api/v1/discover/movies"
+                  extraParams={
+                    slider.data
+                      ? `keywords=${encodeURIExtraParams(slider.data)}`
+                      : ''
+                  }
+                  linkUrl={`/discover/movies?keywords=${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_TV_KEYWORD:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url="/api/v1/discover/tv"
+                  extraParams={
+                    slider.data
+                      ? `keywords=${encodeURIExtraParams(slider.data)}`
+                      : ''
+                  }
+                  linkUrl={`/discover/tv?keywords=${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_MOVIE_GENRE:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url={`/api/v1/discover/movies`}
+                  extraParams={`genre=${slider.data}`}
+                  linkUrl={`/discover/movies?genre=${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_TV_GENRE:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url={`/api/v1/discover/tv`}
+                  extraParams={`genre=${slider.data}`}
+                  linkUrl={`/discover/tv?genre=${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_STUDIO:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url={`/api/v1/discover/movies/studio/${slider.data}`}
+                  linkUrl={`/discover/movies/studio/${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_NETWORK:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url={`/api/v1/discover/tv/network/${slider.data}`}
+                  linkUrl={`/discover/tv/network/${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_SEARCH:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url="/api/v1/search"
+                  extraParams={`query=${slider.data}`}
+                  linkUrl={`/search?query=${slider.data}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_MOVIE_STREAMING_SERVICES:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url="/api/v1/discover/movies"
+                  extraParams={`watchRegion=${slider.data?.split(',')[0]
+                    }&watchProviders=${slider.data?.split(',')[1]}`}
+                  linkUrl={`/discover/movies?watchRegion=${slider.data?.split(',')[0]
+                    }&watchProviders=${slider.data?.split(',')[1]}`}
+                />
+              );
+              break;
+            case DiscoverSliderType.TMDB_TV_STREAMING_SERVICES:
+              sliderComponent = (
+                <MediaSlider
+                  sliderKey={`custom-slider-${slider.id}`}
+                  title={slider.title ?? ''}
+                  url="/api/v1/discover/tv"
+                  extraParams={`watchRegion=${slider.data?.split(',')[0]
+                    }&watchProviders=${slider.data?.split(',')[1]}`}
+                  linkUrl={`/discover/tv?watchRegion=${slider.data?.split(',')[0]
+                    }&watchProviders=${slider.data?.split(',')[1]}`}
+                />
+              );
+              break;
+          }
 
-        if (isEditing) {
-          return (
-            <DiscoverSliderEdit
-              key={`discover-slider-${slider.id}-edit`}
-              slider={slider}
-              onDelete={async () => {
-                const newSliders = await mutate();
+          if (isEditing) {
+            return (
+              <DiscoverSliderEdit
+                key={`discover-slider-${slider.id}-edit`}
+                slider={slider}
+                onDelete={async () => {
+                  const newSliders = await mutate();
 
-                if (newSliders) {
-                  setSliders(newSliders);
-                }
-              }}
-              onEnable={() => {
-                const tempSliders = sliders.slice();
-                tempSliders[index].enabled = !tempSliders[index].enabled;
-                setSliders(tempSliders);
-              }}
-              onPositionUpdate={(updatedItemId, position, hasClickedArrows) => {
-                const originalPosition = sliders.findIndex(
-                  (item) => item.id === updatedItemId
-                );
-                const originalItem = sliders[originalPosition];
+                  if (newSliders) {
+                    setSliders(newSliders);
+                  }
+                }}
+                onEnable={() => {
+                  const tempSliders = sliders.slice();
+                  tempSliders[index].enabled = !tempSliders[index].enabled;
+                  setSliders(tempSliders);
+                }}
+                onPositionUpdate={(updatedItemId, position, hasClickedArrows) => {
+                  const originalPosition = sliders.findIndex(
+                    (item) => item.id === updatedItemId
+                  );
+                  const originalItem = sliders[originalPosition];
 
-                const tempSliders = sliders.slice();
+                  const tempSliders = sliders.slice();
 
-                tempSliders.splice(originalPosition, 1);
-                hasClickedArrows
-                  ? tempSliders.splice(
+                  tempSliders.splice(originalPosition, 1);
+                  hasClickedArrows
+                    ? tempSliders.splice(
                       position === 'Above' ? index - 1 : index + 1,
                       0,
                       originalItem
                     )
-                  : tempSliders.splice(
+                    : tempSliders.splice(
                       position === 'Above' && index > originalPosition
                         ? Math.max(index - 1, 0)
                         : index,
@@ -438,24 +436,25 @@ const Discover = () => {
                       originalItem
                     );
 
-                setSliders(tempSliders);
-              }}
-              disableUpButton={index === 0}
-              disableDownButton={index === sliders.length - 1}
-            >
-              {sliderComponent}
-            </DiscoverSliderEdit>
+                  setSliders(tempSliders);
+                }}
+                disableUpButton={index === 0}
+                disableDownButton={index === sliders.length - 1}
+              >
+                {sliderComponent}
+              </DiscoverSliderEdit>
+            );
+          }
+
+          if (!slider.enabled) {
+            return null;
+          }
+
+          return (
+            <div key={`discover-slider-${slider.id}`}>{sliderComponent}</div>
           );
-        }
-
-        if (!slider.enabled) {
-          return null;
-        }
-
-        return (
-          <div key={`discover-slider-${slider.id}`}>{sliderComponent}</div>
-        );
-      })}
+        })
+      }
     </>
   );
 };

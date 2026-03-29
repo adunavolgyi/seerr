@@ -35,10 +35,10 @@ const MiniQuotaDisplay = ({ userId }: MiniQuotaDisplayProps) => {
       {((data?.movie.limit ?? 0) !== 0 || (data?.tv.limit ?? 0) !== 0) && (
         <div className="flex">
           <div className="flex basis-1/2 flex-col space-y-2">
-            <div className="text-sm text-gray-200">
+            <div className="text-sm text-text-secondary/80">
               {intl.formatMessage(messages.movierequests)}
             </div>
-            <div className="flex h-full items-center space-x-2 text-gray-200">
+            <div className="flex h-full items-center space-x-2 text-text-secondary/80">
               {(data?.movie.limit ?? 0) > 0 ? (
                 <>
                   <ProgressCircle
@@ -46,7 +46,7 @@ const MiniQuotaDisplay = ({ userId }: MiniQuotaDisplayProps) => {
                     progress={Math.round(
                       ((data?.movie.remaining ?? 0) /
                         (data?.movie.limit ?? 1)) *
-                        100
+                      100
                     )}
                     useHeatLevel
                   />
@@ -63,10 +63,10 @@ const MiniQuotaDisplay = ({ userId }: MiniQuotaDisplayProps) => {
             </div>
           </div>
           <div className="flex basis-1/2 flex-col space-y-2">
-            <div className="text-sm text-gray-200">
+            <div className="text-sm text-text-secondary/80">
               {intl.formatMessage(messages.seriesrequests)}
             </div>
-            <div className="flex h-full items-center space-x-2 text-gray-200">
+            <div className="flex h-full items-center space-x-2 text-text-secondary/80">
               {(data?.tv.limit ?? 0) > 0 ? (
                 <>
                   <ProgressCircle
@@ -76,7 +76,7 @@ const MiniQuotaDisplay = ({ userId }: MiniQuotaDisplayProps) => {
                     )}
                     useHeatLevel
                   />
-                  <span className="text-lg font-bold text-gray-200">
+                  <span className="text-lg font-bold text-text-secondary/80">
                     {data?.tv.remaining} / {data?.tv.limit}
                   </span>
                 </>

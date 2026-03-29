@@ -153,8 +153,8 @@ const UserProfile = () => {
           )) && (
           <div className="relative z-40">
             <dl className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
-              <div className="overflow-hidden rounded-lg bg-gray-800/50 px-4 py-5 shadow ring-1 ring-gray-700 sm:p-6">
-                <dt className="truncate text-sm font-bold text-gray-300">
+              <div className="overflow-hidden rounded-lg bg-background-secondary/50 px-4 py-5 shadow ring-1 ring-border sm:p-6">
+                <dt className="truncate text-sm font-bold text-text-secondary">
                   {intl.formatMessage(messages.totalrequests)}
                 </dt>
                 <dd className="mt-1 text-3xl font-semibold text-white">
@@ -173,28 +173,25 @@ const UserProfile = () => {
                 </dd>
               </div>
               <div
-                className={`overflow-hidden rounded-lg bg-gray-800/50 px-4 py-5 shadow ring-1 ${
-                  quota.movie.restricted
-                    ? 'bg-gradient-to-t from-red-900 to-transparent ring-red-500'
-                    : 'ring-gray-700'
-                } sm:p-6`}
+                className={`overflow-hidden rounded-lg bg-background-secondary/50 px-4 py-5 shadow ring-1 ${quota.movie.restricted
+                  ? 'bg-gradient-to-t from-red-900 to-transparent ring-red-500'
+                  : 'ring-border'
+                  } sm:p-6`}
               >
                 <dt
-                  className={`truncate text-sm font-bold ${
-                    quota.movie.restricted ? 'text-red-500' : 'text-gray-300'
-                  }`}
+                  className={`truncate text-sm font-bold ${quota.movie.restricted ? 'text-red-500' : 'text-text-secondary'
+                    }`}
                 >
                   {quota.movie.limit
                     ? intl.formatMessage(messages.pastdays, {
-                        type: intl.formatMessage(messages.movierequests),
-                        days: quota?.movie.days,
-                      })
+                      type: intl.formatMessage(messages.movierequests),
+                      days: quota?.movie.days,
+                    })
                     : intl.formatMessage(messages.movierequests)}
                 </dt>
                 <dd
-                  className={`mt-1 flex items-center text-sm ${
-                    quota.movie.restricted ? 'text-red-500' : 'text-white'
-                  }`}
+                  className={`mt-1 flex items-center text-sm ${quota.movie.restricted ? 'text-red-500' : 'text-white'
+                    }`}
                 >
                   {quota.movie.limit ? (
                     <>
@@ -202,7 +199,7 @@ const UserProfile = () => {
                         progress={Math.round(
                           ((quota?.movie.remaining ?? 0) /
                             (quota?.movie.limit ?? 1)) *
-                            100
+                          100
                         )}
                         useHeatLevel
                         className="mr-2 h-8 w-8"
@@ -228,28 +225,25 @@ const UserProfile = () => {
                 </dd>
               </div>
               <div
-                className={`overflow-hidden rounded-lg bg-gray-800/50 px-4 py-5 shadow ring-1 ${
-                  quota.tv.restricted
-                    ? 'bg-gradient-to-t from-red-900 to-transparent ring-red-500'
-                    : 'ring-gray-700'
-                } sm:p-6`}
+                className={`overflow-hidden rounded-lg bg-background-secondary/50 px-4 py-5 shadow ring-1 ${quota.tv.restricted
+                  ? 'bg-gradient-to-t from-red-900 to-transparent ring-red-500'
+                  : 'ring-border'
+                  } sm:p-6`}
               >
                 <dt
-                  className={`truncate text-sm font-bold ${
-                    quota.tv.restricted ? 'text-red-500' : 'text-gray-300'
-                  }`}
+                  className={`truncate text-sm font-bold ${quota.tv.restricted ? 'text-red-500' : 'text-text-secondary'
+                    }`}
                 >
                   {quota.tv.limit
                     ? intl.formatMessage(messages.pastdays, {
-                        type: intl.formatMessage(messages.seriesrequest),
-                        days: quota?.tv.days,
-                      })
+                      type: intl.formatMessage(messages.seriesrequest),
+                      days: quota?.tv.days,
+                    })
                     : intl.formatMessage(messages.seriesrequest)}
                 </dt>
                 <dd
-                  className={`mt-1 flex items-center text-sm ${
-                    quota.tv.restricted ? 'text-red-500' : 'text-white'
-                  }`}
+                  className={`mt-1 flex items-center text-sm ${quota.tv.restricted ? 'text-red-500' : 'text-white'
+                    }`}
                 >
                   {quota.tv.limit ? (
                     <>
@@ -257,7 +251,7 @@ const UserProfile = () => {
                         progress={Math.round(
                           ((quota?.tv.remaining ?? 0) /
                             (quota?.tv.limit ?? 1)) *
-                            100
+                          100
                         )}
                         useHeatLevel
                         className="mr-2 h-8 w-8"

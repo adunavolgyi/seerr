@@ -78,7 +78,7 @@ const RequestItemError = ({
   });
 
   return (
-    <div className="flex h-64 w-full flex-col justify-center rounded-xl bg-gray-800 py-4 text-gray-400 shadow-md ring-1 ring-red-500 xl:h-28 xl:flex-row">
+    <div className="flex h-64 w-full flex-col justify-center rounded-xl bg-background-secondary py-4 text-text-secondary shadow-md ring-1 ring-red-500 xl:h-28 xl:flex-row">
       <div className="flex w-full flex-col justify-between overflow-hidden sm:flex-row">
         <div className="flex w-full flex-col justify-center overflow-hidden pl-4 pr-4 sm:pr-0 xl:w-7/12 2xl:w-2/3">
           <div className="flex text-lg font-bold text-white xl:text-xl">
@@ -123,7 +123,7 @@ const RequestItemError = ({
                   {intl.formatMessage(globalMessages.status)}
                 </span>
                 {requestData.status === MediaRequestStatus.DECLINED ||
-                requestData.status === MediaRequestStatus.FAILED ? (
+                  requestData.status === MediaRequestStatus.FAILED ? (
                   <Badge badgeType="danger">
                     {requestData.status === MediaRequestStatus.DECLINED
                       ? intl.formatMessage(globalMessages.declined)
@@ -133,21 +133,21 @@ const RequestItemError = ({
                   <StatusBadge
                     status={
                       requestData.media[
-                        requestData.is4k ? 'status4k' : 'status'
+                      requestData.is4k ? 'status4k' : 'status'
                       ]
                     }
                     downloadItem={
                       requestData.media[
-                        requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
+                      requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
                       ]
                     }
                     title={intl.formatMessage(messages.unknowntitle)}
                     inProgress={
                       (
                         requestData.media[
-                          requestData.is4k
-                            ? 'downloadStatus4k'
-                            : 'downloadStatus'
+                        requestData.is4k
+                          ? 'downloadStatus4k'
+                          : 'downloadStatus'
                         ] ?? []
                       ).length > 0
                     }
@@ -178,7 +178,7 @@ const RequestItemError = ({
                             value={Math.floor(
                               (new Date(requestData.createdAt).getTime() -
                                 Date.now()) /
-                                1000
+                              1000
                             )}
                             updateIntervalInSeconds={1}
                             numeric="auto"
@@ -217,7 +217,7 @@ const RequestItemError = ({
                         value={Math.floor(
                           (new Date(requestData.createdAt).getTime() -
                             Date.now()) /
-                            1000
+                          1000
                         )}
                         updateIntervalInSeconds={1}
                         numeric="auto"
@@ -238,7 +238,7 @@ const RequestItemError = ({
                           value={Math.floor(
                             (new Date(requestData.updatedAt).getTime() -
                               Date.now()) /
-                              1000
+                            1000
                           )}
                           updateIntervalInSeconds={1}
                           numeric="auto"
@@ -404,7 +404,7 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
           setShowEditModal(false);
         }}
       />
-      <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-gray-800 py-2 text-gray-400 shadow-md ring-1 ring-gray-700 xl:h-28 xl:flex-row">
+      <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-background-secondary py-2 text-text-secondary shadow-md ring-1 ring-border xl:h-28 xl:flex-row">
         {title.backdropPath && (
           <div className="absolute inset-0 z-0 w-full bg-cover bg-center xl:w-2/3">
             <CachedImage
@@ -504,7 +504,7 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
                 </Badge>
               ) : requestData.status === MediaRequestStatus.PENDING &&
                 requestData.media[requestData.is4k ? 'status4k' : 'status'] ===
-                  MediaStatus.DELETED ? (
+                MediaStatus.DELETED ? (
                 <Badge
                   badgeType="warning"
                   href={`/${requestData.type}/${requestData.media.tmdbId}?manage=1`}
@@ -518,14 +518,14 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
                   }
                   downloadItem={
                     requestData.media[
-                      requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
+                    requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
                     ]
                   }
                   title={isMovie(title) ? title.title : title.name}
                   inProgress={
                     (
                       requestData.media[
-                        requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
+                      requestData.is4k ? 'downloadStatus4k' : 'downloadStatus'
                       ] ?? []
                     ).length > 0
                   }
@@ -557,7 +557,7 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
                           value={Math.floor(
                             (new Date(requestData.createdAt).getTime() -
                               Date.now()) /
-                              1000
+                            1000
                           )}
                           updateIntervalInSeconds={1}
                           numeric="auto"
@@ -596,7 +596,7 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
                       value={Math.floor(
                         (new Date(requestData.createdAt).getTime() -
                           Date.now()) /
-                          1000
+                        1000
                       )}
                       updateIntervalInSeconds={1}
                       numeric="auto"
@@ -617,7 +617,7 @@ const RequestItem = ({ request, revalidateList }: RequestItemProps) => {
                         value={Math.floor(
                           (new Date(requestData.updatedAt).getTime() -
                             Date.now()) /
-                            1000
+                          1000
                         )}
                         updateIntervalInSeconds={1}
                         numeric="auto"

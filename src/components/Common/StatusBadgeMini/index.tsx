@@ -24,8 +24,7 @@ const StatusBadgeMini = ({
   shrink = false,
 }: StatusBadgeMiniProps) => {
   const badgeStyle = [
-    `rounded-full shadow-md ${
-      shrink ? 'w-4 sm:w-5 border p-0' : 'w-5 ring-1 p-0.5'
+    `rounded-full shadow-md ${shrink ? 'w-4 sm:w-5 border p-0' : 'w-5 ring-1 p-0.5'
     }`,
   ];
 
@@ -34,7 +33,7 @@ const StatusBadgeMini = ({
   switch (status) {
     case MediaStatus.PROCESSING:
       badgeStyle.push(
-        'bg-indigo-500/80 border-indigo-400 ring-indigo-400 text-indigo-100'
+        'bg-amber-500/80 border-amber-400 ring-amber-400 text-amber-100'
       );
       indicatorIcon = <ClockIcon />;
       break;
@@ -72,12 +71,11 @@ const StatusBadgeMini = ({
 
   return (
     <div
-      className={`relative inline-flex whitespace-nowrap rounded-full border-gray-700 text-xs font-semibold leading-5 ring-gray-700 ${
-        shrink ? '' : 'ring-1'
-      }`}
+      className={`relative inline-flex whitespace-nowrap rounded-full border-border text-xs font-semibold leading-5 ring-border ${shrink ? '' : 'ring-1'
+        }`}
     >
       <div className={badgeStyle.join(' ')}>{indicatorIcon}</div>
-      {is4k && <span className="pl-1 pr-2 text-gray-200">4K</span>}
+      {is4k && <span className="pl-1 pr-2 text-text-primary">4K</span>}
     </div>
   );
 };

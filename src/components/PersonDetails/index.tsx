@@ -136,7 +136,7 @@ const PersonDetails = () => {
 
   const mediaTypePicker = (
     <div className="mb-2 flex flex-grow sm:mb-0 sm:mr-2 lg:flex-grow-0">
-      <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-500 bg-gray-800 px-3 text-sm text-gray-100">
+      <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-border-light bg-background-secondary px-3 text-sm text-text-primary">
         <CircleStackIcon className="h-6 w-6" />
       </span>
       <select
@@ -185,7 +185,7 @@ const PersonDetails = () => {
                 canExpand
               />
               {media.character && (
-                <div className="mt-2 w-full truncate text-center text-xs text-gray-300">
+                <div className="mt-2 w-full truncate text-center text-xs text-text-secondary">
                   {intl.formatMessage(messages.ascharacter, {
                     character: media.character,
                   })}
@@ -226,7 +226,7 @@ const PersonDetails = () => {
                 canExpand
               />
               {media.job && (
-                <div className="mt-2 w-full truncate text-center text-xs text-gray-300">
+                <div className="mt-2 w-full truncate text-center text-xs text-text-secondary">
                   {media.job}
                 </div>
               )}
@@ -255,12 +255,11 @@ const PersonDetails = () => {
         </div>
       )}
       <div
-        className={`relative z-10 mb-8 mt-4 flex flex-col items-center lg:flex-row ${
-          data.biography ? 'lg:items-start' : ''
-        }`}
+        className={`relative z-10 mb-8 mt-4 flex flex-col items-center lg:flex-row ${data.biography ? 'lg:items-start' : ''
+          }`}
       >
         {data.profilePath && (
-          <div className="relative mb-6 mr-0 h-36 w-36 flex-shrink-0 overflow-hidden rounded-full ring-1 ring-gray-700 lg:mb-0 lg:mr-6 lg:h-44 lg:w-44">
+          <div className="relative mb-6 mr-0 h-36 w-36 flex-shrink-0 overflow-hidden rounded-full ring-1 ring-border lg:mb-0 lg:mr-6 lg:h-44 lg:w-44">
             <CachedImage
               type="tmdb"
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${data.profilePath}`}
@@ -270,7 +269,7 @@ const PersonDetails = () => {
             />
           </div>
         )}
-        <div className="w-full text-center text-gray-300 lg:text-left">
+        <div className="w-full text-center text-text-secondary lg:text-left">
           <div className="flex w-full items-center justify-center lg:justify-between">
             <h1 className="text-3xl text-white lg:text-4xl">{data.name}</h1>
             <div className="hidden flex-shrink-0 lg:block">

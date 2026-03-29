@@ -97,7 +97,7 @@ const CollectionRequestModal = ({
           (part.mediaInfo[is4k ? 'status4k' : 'status'] ===
             MediaStatus.AVAILABLE ||
             part.mediaInfo[is4k ? 'status4k' : 'status'] ===
-              MediaStatus.PROCESSING) &&
+            MediaStatus.PROCESSING) &&
           !requestedParts.includes(part.id)
       )
       .map((part) => part.id);
@@ -280,11 +280,11 @@ const CollectionRequestModal = ({
           : selectedParts.length === 0
             ? intl.formatMessage(messages.selectmovies)
             : intl.formatMessage(
-                is4k ? messages.requestmovies4k : messages.requestmovies,
-                {
-                  count: selectedParts.length,
-                }
-              )
+              is4k ? messages.requestmovies4k : messages.requestmovies,
+              {
+                count: selectedParts.length,
+              }
+            )
       }
       okDisabled={selectedParts.length === 0}
       okButtonType={'primary'}
@@ -328,24 +328,21 @@ const CollectionRequestModal = ({
                             toggleAllParts();
                           }
                         }}
-                        className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center pt-2 focus:outline-none ${
-                          quota?.movie.limit &&
+                        className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center pt-2 focus:outline-none ${quota?.movie.limit &&
                           (quota.movie.remaining ?? 0) < unrequestedParts.length
-                            ? 'opacity-50'
-                            : ''
-                        }`}
+                          ? 'opacity-50'
+                          : ''
+                          }`}
                       >
                         <span
                           aria-hidden="true"
-                          className={`${
-                            isAllParts() ? 'bg-indigo-500' : 'bg-gray-800'
-                          } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
+                          className={`${isAllParts() ? 'bg-amber-500' : 'bg-gray-800'
+                            } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
                         />
                         <span
                           aria-hidden="true"
-                          className={`${
-                            isAllParts() ? 'translate-x-5' : 'translate-x-0'
-                          } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-blue-300 group-focus:ring`}
+                          className={`${isAllParts() ? 'translate-x-5' : 'translate-x-0'
+                            } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-amber-300 group-focus:ring`}
                         />
                       </span>
                     </th>
@@ -370,9 +367,9 @@ const CollectionRequestModal = ({
                       const partRequest = getPartRequest(part.id);
                       const partMedia =
                         part.mediaInfo &&
-                        part.mediaInfo[is4k ? 'status4k' : 'status'] !==
+                          part.mediaInfo[is4k ? 'status4k' : 'status'] !==
                           MediaStatus.UNKNOWN &&
-                        part.mediaInfo[is4k ? 'status4k' : 'status'] !==
+                          part.mediaInfo[is4k ? 'status4k' : 'status'] !==
                           MediaStatus.DELETED
                           ? part.mediaInfo
                           : undefined;
@@ -380,10 +377,9 @@ const CollectionRequestModal = ({
                       return (
                         <tr key={`part-${part.id}`}>
                           <td
-                            className={`whitespace-nowrap px-4 py-4 text-sm font-medium leading-5 text-gray-100 ${
-                              partMedia?.status === MediaStatus.BLOCKLISTED &&
+                            className={`whitespace-nowrap px-4 py-4 text-sm font-medium leading-5 text-gray-100 ${partMedia?.status === MediaStatus.BLOCKLISTED &&
                               'pointer-events-none opacity-50'
-                            }`}
+                              }`}
                           >
                             <span
                               role="checkbox"
@@ -391,7 +387,7 @@ const CollectionRequestModal = ({
                               aria-checked={
                                 (!!partMedia &&
                                   partMedia.status !==
-                                    MediaStatus.BLOCKLISTED) ||
+                                  MediaStatus.BLOCKLISTED) ||
                                 isSelectedPart(part.id)
                               }
                               onClick={() => togglePart(part.id)}
@@ -400,49 +396,45 @@ const CollectionRequestModal = ({
                                   togglePart(part.id);
                                 }
                               }}
-                              className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center pt-2 focus:outline-none ${
-                                (!!partMedia &&
-                                  partMedia.status !==
-                                    MediaStatus.BLOCKLISTED) ||
+                              className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center pt-2 focus:outline-none ${(!!partMedia &&
+                                partMedia.status !==
+                                MediaStatus.BLOCKLISTED) ||
                                 partRequest ||
                                 (quota?.movie.limit &&
                                   currentlyRemaining <= 0 &&
                                   !isSelectedPart(part.id))
-                                  ? 'opacity-50'
-                                  : ''
-                              }`}
+                                ? 'opacity-50'
+                                : ''
+                                }`}
                             >
                               <span
                                 aria-hidden="true"
-                                className={`${
-                                  (!!partMedia &&
-                                    partMedia.status !==
-                                      MediaStatus.BLOCKLISTED) ||
+                                className={`${(!!partMedia &&
+                                  partMedia.status !==
+                                  MediaStatus.BLOCKLISTED) ||
                                   partRequest ||
                                   isSelectedPart(part.id)
-                                    ? 'bg-indigo-500'
-                                    : 'bg-gray-700'
-                                } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
+                                  ? 'bg-amber-500'
+                                  : 'bg-gray-700'
+                                  } absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out`}
                               />
                               <span
                                 aria-hidden="true"
-                                className={`${
-                                  (!!partMedia &&
-                                    partMedia.status !==
-                                      MediaStatus.BLOCKLISTED) ||
+                                className={`${(!!partMedia &&
+                                  partMedia.status !==
+                                  MediaStatus.BLOCKLISTED) ||
                                   partRequest ||
                                   isSelectedPart(part.id)
-                                    ? 'translate-x-5'
-                                    : 'translate-x-0'
-                                } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-blue-300 group-focus:ring`}
+                                  ? 'translate-x-5'
+                                  : 'translate-x-0'
+                                  } absolute left-0 inline-block h-5 w-5 rounded-full border border-gray-200 bg-white shadow transition-transform duration-200 ease-in-out group-focus:border-amber-300 group-focus:ring`}
                               />
                             </span>
                           </td>
                           <td
-                            className={`flex items-center px-1 py-4 text-sm font-medium leading-5 text-gray-100 md:px-6 ${
-                              partMedia?.status === MediaStatus.BLOCKLISTED &&
+                            className={`flex items-center px-1 py-4 text-sm font-medium leading-5 text-gray-100 md:px-6 ${partMedia?.status === MediaStatus.BLOCKLISTED &&
                               'pointer-events-none opacity-50'
-                            }`}
+                              }`}
                           >
                             <div className="relative h-auto w-10 flex-shrink-0 overflow-hidden rounded-md">
                               <CachedImage
@@ -482,26 +474,26 @@ const CollectionRequestModal = ({
                             )}
                             {!partMedia &&
                               partRequest?.status ===
-                                MediaRequestStatus.PENDING && (
+                              MediaRequestStatus.PENDING && (
                                 <Badge badgeType="warning">
                                   {intl.formatMessage(globalMessages.pending)}
                                 </Badge>
                               )}
                             {((!partMedia &&
                               partRequest?.status ===
-                                MediaRequestStatus.APPROVED) ||
+                              MediaRequestStatus.APPROVED) ||
                               partMedia?.[is4k ? 'status4k' : 'status'] ===
-                                MediaStatus.PROCESSING) && (
-                              <Badge badgeType="primary">
-                                {intl.formatMessage(globalMessages.requested)}
-                              </Badge>
-                            )}
+                              MediaStatus.PROCESSING) && (
+                                <Badge badgeType="primary">
+                                  {intl.formatMessage(globalMessages.requested)}
+                                </Badge>
+                              )}
                             {partMedia?.[is4k ? 'status4k' : 'status'] ===
                               MediaStatus.AVAILABLE && (
-                              <Badge badgeType="success">
-                                {intl.formatMessage(globalMessages.available)}
-                              </Badge>
-                            )}
+                                <Badge badgeType="success">
+                                  {intl.formatMessage(globalMessages.available)}
+                                </Badge>
+                              )}
                             {partMedia?.status === MediaStatus.BLOCKLISTED && (
                               <Badge badgeType="danger">
                                 {intl.formatMessage(globalMessages.blocklisted)}
@@ -519,14 +511,14 @@ const CollectionRequestModal = ({
       </div>
       {(hasPermission(Permission.REQUEST_ADVANCED) ||
         hasPermission(Permission.MANAGE_REQUESTS)) && (
-        <AdvancedRequester
-          type="movie"
-          is4k={is4k}
-          onChange={(overrides) => {
-            setRequestOverrides(overrides);
-          }}
-        />
-      )}
+          <AdvancedRequester
+            type="movie"
+            is4k={is4k}
+            onChange={(overrides) => {
+              setRequestOverrides(overrides);
+            }}
+          />
+        )}
     </Modal>
   );
 };

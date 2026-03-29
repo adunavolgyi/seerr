@@ -28,7 +28,7 @@ const LabeledCheckbox: React.FC<LabeledCheckboxProps> = ({
           <label htmlFor="localLogin" className="block" aria-label={label}>
             <div className="flex flex-col">
               <span className="font-medium text-white">{label}</span>
-              <span className="font-normal text-gray-400">{description}</span>
+              <span className="font-normal text-text-secondary">{description}</span>
             </div>
           </label>
         </div>

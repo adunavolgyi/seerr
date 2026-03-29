@@ -62,9 +62,8 @@ const IssueComment = ({
 
   return (
     <div
-      className={`flex ${
-        isReversed ? 'flex-row' : 'flex-row-reverse space-x-reverse'
-      } mt-4 space-x-4`}
+      className={`flex ${isReversed ? 'flex-row' : 'flex-row-reverse space-x-reverse'
+        } mt-4 space-x-4`}
     >
       <Transition
         as={Fragment}
@@ -91,13 +90,13 @@ const IssueComment = ({
           type="avatar"
           src={comment.user.avatar}
           alt=""
-          className="h-10 w-10 scale-100 transform-gpu rounded-full object-cover ring-1 ring-gray-500 transition duration-300 hover:scale-105"
+          className="h-10 w-10 scale-100 transform-gpu rounded-full object-cover ring-1 ring-border-light transition duration-300 hover:scale-105"
           width={40}
           height={40}
         />
       </Link>
       <div className="relative flex-1">
-        <div className="w-full rounded-md shadow ring-1 ring-gray-500">
+        <div className="w-full rounded-md shadow ring-1 ring-border-light">
           {(isActiveUser || hasPermission(Permission.MANAGE_ISSUES)) && (
             <Menu
               as="div"
@@ -106,7 +105,7 @@ const IssueComment = ({
               {({ open }) => (
                 <>
                   <div>
-                    <Menu.Button className="flex items-center rounded-full text-gray-400 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                    <Menu.Button className="flex items-center rounded-full text-text-secondary hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-accent">
                       <span className="sr-only">Open options</span>
                       <EllipsisVerticalIcon
                         className="h-5 w-5"
@@ -127,7 +126,7 @@ const IssueComment = ({
                   >
                     <Menu.Items
                       static
-                      className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-surface shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     >
                       <div className="py-1">
                         {isActiveUser && (
@@ -135,11 +134,10 @@ const IssueComment = ({
                             {({ active }) => (
                               <button
                                 onClick={() => setIsEditing(true)}
-                                className={`block w-full px-4 py-2 text-left text-sm ${
-                                  active
-                                    ? 'bg-gray-600 text-white'
-                                    : 'text-gray-100'
-                                }`}
+                                className={`block w-full px-4 py-2 text-left text-sm ${active
+                                  ? 'bg-surface/70 text-white'
+                                  : 'text-text-primary'
+                                  }`}
                               >
                                 {intl.formatMessage(messages.edit)}
                               </button>
@@ -150,11 +148,10 @@ const IssueComment = ({
                           {({ active }) => (
                             <button
                               onClick={() => setShowDeleteModal(true)}
-                              className={`block w-full px-4 py-2 text-left text-sm ${
-                                active
-                                  ? 'bg-gray-600 text-white'
-                                  : 'text-gray-100'
-                              }`}
+                              className={`block w-full px-4 py-2 text-left text-sm ${active
+                                ? 'bg-surface/70 text-white'
+                                : 'text-text-primary'
+                                }`}
                             >
                               {intl.formatMessage(messages.delete)}
                             </button>
@@ -168,11 +165,10 @@ const IssueComment = ({
             </Menu>
           )}
           <div
-            className={`absolute top-3 z-10 h-3 w-3 rotate-45 bg-gray-800 shadow ring-1 ring-gray-500 ${
-              isReversed ? '-left-1' : '-right-1'
-            }`}
+            className={`absolute top-3 z-10 h-3 w-3 rotate-45 bg-background-secondary shadow ring-1 ring-border-light ${isReversed ? '-left-1' : '-right-1'
+              }`}
           />
-          <div className="relative z-20 w-full rounded-md bg-gray-800 py-4 pl-4 pr-8">
+          <div className="relative z-20 w-full rounded-md bg-background-secondary py-4 pl-4 pr-8">
             {isEditing ? (
               <Formik
                 initialValues={{ newMessage: comment.message }}
@@ -234,9 +230,8 @@ const IssueComment = ({
           </div>
         </div>
         <div
-          className={`flex items-center justify-between pt-2 text-xs ${
-            isReversed ? 'flex-row-reverse' : 'flex-row'
-          }`}
+          className={`flex items-center justify-between pt-2 text-xs ${isReversed ? 'flex-row-reverse' : 'flex-row'
+            }`}
         >
           <span>
             {intl.formatMessage(
@@ -249,7 +244,7 @@ const IssueComment = ({
                     href={
                       isActiveUser ? '/profile' : `/users/${comment.user.id}`
                     }
-                    className="font-semibold text-gray-100 transition duration-300 hover:text-white hover:underline"
+                    className="font-semibold text-text-primary transition duration-300 hover:text-white hover:underline"
                   >
                     {comment.user.displayName}
                   </Link>
@@ -258,7 +253,7 @@ const IssueComment = ({
                   <FormattedRelativeTime
                     value={Math.floor(
                       (new Date(comment.createdAt).getTime() - Date.now()) /
-                        1000
+                      1000
                     )}
                     updateIntervalInSeconds={1}
                     numeric="auto"

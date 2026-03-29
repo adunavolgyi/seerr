@@ -44,7 +44,7 @@ const DeviceItem = ({
   const parsedUserAgent = UAParser(device.userAgent);
 
   return (
-    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-gray-800 py-4 text-gray-400 shadow-md ring-1 ring-gray-700 xl:h-28 xl:flex-row">
+    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-background-secondary py-4 text-text-secondary shadow-md ring-1 ring-border xl:h-28 xl:flex-row">
       <div className="relative flex w-full flex-col justify-between overflow-hidden sm:flex-row">
         <div className="relative z-10 flex w-full items-center overflow-hidden pl-4 pr-4 sm:pr-0 xl:w-7/12 2xl:w-2/3">
           <div className="relative h-auto w-12 flex-shrink-0 scale-100 transform-gpu overflow-hidden rounded-md transition duration-300 hover:scale-105">
@@ -58,10 +58,10 @@ const DeviceItem = ({
             <div className="pt-0.5 text-xs font-medium text-white sm:pt-1">
               {device.createdAt
                 ? intl.formatDate(device.createdAt, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
                 : 'N/A'}
             </div>
             <div className="mr-2 min-w-0 truncate text-lg font-bold text-white hover:underline xl:text-xl">

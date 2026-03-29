@@ -61,17 +61,17 @@ const StatusBadge = ({
     hasPermission(
       is4k
         ? [
-            Permission.REQUEST_4K,
-            mediaType === 'movie'
-              ? Permission.REQUEST_4K_MOVIE
-              : Permission.REQUEST_4K_TV,
-          ]
+          Permission.REQUEST_4K,
+          mediaType === 'movie'
+            ? Permission.REQUEST_4K_MOVIE
+            : Permission.REQUEST_4K_TV,
+        ]
         : [
-            Permission.REQUEST,
-            mediaType === 'movie'
-              ? Permission.REQUEST_MOVIE
-              : Permission.REQUEST_TV,
-          ],
+          Permission.REQUEST,
+          mediaType === 'movie'
+            ? Permission.REQUEST_MOVIE
+            : Permission.REQUEST_TV,
+        ],
       {
         type: 'or',
       }
@@ -108,11 +108,11 @@ const StatusBadge = ({
 
   const tooltipContent =
     mediaType === 'tv' &&
-    downloadItem.length > 1 &&
-    downloadItem.every(
-      (item) =>
-        item.downloadId && item.downloadId === downloadItem[0].downloadId
-    ) ? (
+      downloadItem.length > 1 &&
+      downloadItem.every(
+        (item) =>
+          item.downloadId && item.downloadId === downloadItem[0].downloadId
+      ) ? (
       <DownloadBlock
         downloadItem={downloadItem[0]}
         title={Array.isArray(title) ? title[0] : title}
@@ -137,17 +137,15 @@ const StatusBadge = ({
 
   const badgeDownloadProgress = (
     <div
-      className={`absolute left-0 top-0 z-10 flex h-full ${
-        status === MediaStatus.DELETED
+      className={`absolute left-0 top-0 z-10 flex h-full ${status === MediaStatus.DELETED
           ? 'bg-red-600/80'
           : status === MediaStatus.PROCESSING
-            ? 'bg-indigo-500/80'
+            ? 'bg-amber-500/80'
             : 'bg-green-500/80'
-      } transition-all duration-200 ease-in-out`}
+        } transition-all duration-200 ease-in-out`}
       style={{
-        width: `${
-          downloadItem ? calculateDownloadProgress(downloadItem[0]) : 0
-        }%`,
+        width: `${downloadItem ? calculateDownloadProgress(downloadItem[0]) : 0
+          }%`,
       }}
     />
   );
@@ -157,9 +155,8 @@ const StatusBadge = ({
       return (
         <Tooltip
           content={inProgress ? tooltipContent : mediaLinkDescription}
-          className={`${
-            inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
-          }`}
+          className={`${inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
+            }`}
           tooltipConfig={{
             ...(inProgress && { interactive: true, delayHide: 100 }),
           }}
@@ -167,15 +164,13 @@ const StatusBadge = ({
           <Badge
             badgeType="success"
             href={mediaLink}
-            className={`${
-              inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
-            } overflow-hidden`}
+            className={`${inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
+              } overflow-hidden`}
           >
             {inProgress && badgeDownloadProgress}
             <div
-              className={`relative z-20 flex items-center ${
-                inProgress && 'px-2'
-              }`}
+              className={`relative z-20 flex items-center ${inProgress && 'px-2'
+                }`}
             >
               <span>
                 {intl.formatMessage(
@@ -192,11 +187,11 @@ const StatusBadge = ({
                   {mediaType === 'tv' &&
                     downloadItem[0].episode &&
                     (downloadItem.length > 1 &&
-                    downloadItem.every(
-                      (item) =>
-                        item.downloadId &&
-                        item.downloadId === downloadItem[0].downloadId
-                    ) ? (
+                      downloadItem.every(
+                        (item) =>
+                          item.downloadId &&
+                          item.downloadId === downloadItem[0].downloadId
+                      ) ? (
                       <span className="ml-1">
                         {intl.formatMessage(messages.seasonnumber, {
                           seasonNumber: downloadItem[0].episode.seasonNumber,
@@ -222,9 +217,8 @@ const StatusBadge = ({
       return (
         <Tooltip
           content={inProgress ? tooltipContent : mediaLinkDescription}
-          className={`${
-            inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
-          }`}
+          className={`${inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
+            }`}
           tooltipConfig={{
             ...(inProgress && { interactive: true, delayHide: 100 }),
           }}
@@ -232,15 +226,13 @@ const StatusBadge = ({
           <Badge
             badgeType="success"
             href={mediaLink}
-            className={`${
-              inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
-            } overflow-hidden`}
+            className={`${inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
+              } overflow-hidden`}
           >
             {inProgress && badgeDownloadProgress}
             <div
-              className={`relative z-20 flex items-center ${
-                inProgress && 'px-2'
-              }`}
+              className={`relative z-20 flex items-center ${inProgress && 'px-2'
+                }`}
             >
               <span>
                 {intl.formatMessage(
@@ -257,11 +249,11 @@ const StatusBadge = ({
                   {mediaType === 'tv' &&
                     downloadItem[0].episode &&
                     (downloadItem.length > 1 &&
-                    downloadItem.every(
-                      (item) =>
-                        item.downloadId &&
-                        item.downloadId === downloadItem[0].downloadId
-                    ) ? (
+                      downloadItem.every(
+                        (item) =>
+                          item.downloadId &&
+                          item.downloadId === downloadItem[0].downloadId
+                      ) ? (
                       <span className="ml-1">
                         {intl.formatMessage(messages.seasonnumber, {
                           seasonNumber: downloadItem[0].episode.seasonNumber,
@@ -287,9 +279,8 @@ const StatusBadge = ({
       return (
         <Tooltip
           content={inProgress ? tooltipContent : mediaLinkDescription}
-          className={`${
-            inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
-          }`}
+          className={`${inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
+            }`}
           tooltipConfig={{
             ...(inProgress && { interactive: true, delayHide: 100 }),
           }}
@@ -297,15 +288,13 @@ const StatusBadge = ({
           <Badge
             badgeType="primary"
             href={mediaLink}
-            className={`${
-              inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
-            } overflow-hidden`}
+            className={`${inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
+              } overflow-hidden`}
           >
             {inProgress && badgeDownloadProgress}
             <div
-              className={`relative z-20 flex items-center ${
-                inProgress && 'px-2'
-              }`}
+              className={`relative z-20 flex items-center ${inProgress && 'px-2'
+                }`}
             >
               <span>
                 {intl.formatMessage(
@@ -322,11 +311,11 @@ const StatusBadge = ({
                   {mediaType === 'tv' &&
                     downloadItem[0].episode &&
                     (downloadItem.length > 1 &&
-                    downloadItem.every(
-                      (item) =>
-                        item.downloadId &&
-                        item.downloadId === downloadItem[0].downloadId
-                    ) ? (
+                      downloadItem.every(
+                        (item) =>
+                          item.downloadId &&
+                          item.downloadId === downloadItem[0].downloadId
+                      ) ? (
                       <span className="ml-1">
                         {intl.formatMessage(messages.seasonnumber, {
                           seasonNumber: downloadItem[0].episode.seasonNumber,
@@ -374,9 +363,8 @@ const StatusBadge = ({
       return (
         <Tooltip
           content={inProgress ? tooltipContent : mediaLinkDescription}
-          className={`${
-            inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
-          }`}
+          className={`${inProgress && 'hidden max-h-96 w-96 overflow-y-auto sm:block'
+            }`}
           tooltipConfig={{
             ...(inProgress && { interactive: true, delayHide: 100 }),
           }}
@@ -384,15 +372,13 @@ const StatusBadge = ({
           <Badge
             badgeType="danger"
             href={mediaLink}
-            className={`${
-              inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
-            } overflow-hidden`}
+            className={`${inProgress && 'relative !bg-gray-700/80 !px-0 hover:!bg-gray-700'
+              } overflow-hidden`}
           >
             {inProgress && badgeDownloadProgress}
             <div
-              className={`relative z-20 flex items-center ${
-                inProgress && 'px-2'
-              }`}
+              className={`relative z-20 flex items-center ${inProgress && 'px-2'
+                }`}
             >
               <span>
                 {intl.formatMessage(
@@ -409,11 +395,11 @@ const StatusBadge = ({
                   {mediaType === 'tv' &&
                     downloadItem[0].episode &&
                     (downloadItem.length > 1 &&
-                    downloadItem.every(
-                      (item) =>
-                        item.downloadId &&
-                        item.downloadId === downloadItem[0].downloadId
-                    ) ? (
+                      downloadItem.every(
+                        (item) =>
+                          item.downloadId &&
+                          item.downloadId === downloadItem[0].downloadId
+                      ) ? (
                       <span className="ml-1">
                         {intl.formatMessage(messages.seasonnumber, {
                           seasonNumber: downloadItem[0].episode.seasonNumber,

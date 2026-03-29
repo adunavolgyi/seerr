@@ -14,11 +14,10 @@ const CompanyCard = ({ image, url, name }: CompanyCardProps) => {
   return (
     <Link
       href={url}
-      className={`relative flex h-32 w-56 transform-gpu cursor-pointer items-center justify-center p-8 shadow ring-1 transition duration-300 ease-in-out sm:h-36 sm:w-72 ${
-        isHovered
-          ? 'scale-105 bg-gray-700 ring-gray-500'
-          : 'scale-100 bg-gray-800 ring-gray-700'
-      } rounded-xl`}
+      className={`relative flex h-32 w-56 transform-gpu cursor-pointer items-center justify-center p-8 shadow ring-1 transition duration-300 ease-in-out sm:h-36 sm:w-72 ${isHovered
+          ? 'scale-105 bg-surface ring-border-light'
+          : 'scale-100 bg-background-secondary ring-border'
+        } rounded-xl`}
       onMouseEnter={() => {
         setHovered(true);
       }}
@@ -42,9 +41,8 @@ const CompanyCard = ({ image, url, name }: CompanyCardProps) => {
         />
       </div>
       <div
-        className={`absolute bottom-0 left-0 right-0 z-0 h-12 rounded-b-xl bg-gradient-to-t ${
-          isHovered ? 'from-gray-800' : 'from-gray-900'
-        }`}
+        className={`absolute bottom-0 left-0 right-0 z-0 h-12 rounded-b-xl bg-gradient-to-t ${isHovered ? 'from-gray-800' : 'from-gray-900'
+          }`}
       />
     </Link>
   );

@@ -178,24 +178,23 @@ const DiscoverSliderEdit = ({
     <div
       key={`discover-slider-${slider.id}-editing`}
       data-testid="discover-slider-edit-mode"
-      className={`relative mb-4 rounded-lg bg-gray-800 shadow-md ${
-        isDragging ? 'opacity-0' : 'opacity-100'
-      }`}
+      className={`relative mb-4 rounded-lg bg-background-secondary shadow-md ${isDragging ? 'opacity-0' : 'opacity-100'
+        }`}
       {...dragProps}
       {...dropProps}
       ref={ref}
     >
       {hoverPosition === Position.Above && (
         <div
-          className={`absolute -top-3 left-0 w-full border-t-4 border-indigo-500`}
+          className={`absolute -top-3 left-0 w-full border-t-4 border-amber-500`}
         />
       )}
       {hoverPosition === Position.Below && (
         <div
-          className={`absolute -bottom-2 left-0 w-full border-t-4 border-indigo-500`}
+          className={`absolute -bottom-2 left-0 w-full border-t-4 border-amber-500`}
         />
       )}
-      <div className="flex w-full flex-col rounded-t-lg border-l border-r border-t border-gray-800 bg-gray-900 p-4 text-gray-400 md:flex-row md:items-center md:space-x-2">
+      <div className="flex w-full flex-col rounded-t-lg border-l border-r border-t border-background-secondary bg-background-primary p-4 text-text-secondary md:flex-row md:items-center md:space-x-2">
         <div
           className={`${slider.data ? 'mb-4' : 'mb-0'} flex space-x-2 md:mb-0`}
         >
@@ -205,43 +204,42 @@ const DiscoverSliderEdit = ({
           </div>
         </div>
         <div
-          className={`pointer-events-none ${
-            slider.data ? 'mb-4' : ''
-          } flex-1 md:mb-0`}
+          className={`pointer-events-none ${slider.data ? 'mb-4' : ''
+            } flex-1 md:mb-0`}
         >
           {(slider.type === DiscoverSliderType.TMDB_MOVIE_KEYWORD ||
             slider.type === DiscoverSliderType.TMDB_TV_KEYWORD) && (
-            <div className="flex space-x-2">
-              {slider.data?.split(',').map((keywordId) => (
-                <KeywordTag
-                  key={`slider-keywords-${slider.id}-${keywordId}`}
-                  keywordId={Number(keywordId)}
-                />
-              ))}
-            </div>
-          )}
+              <div className="flex space-x-2">
+                {slider.data?.split(',').map((keywordId) => (
+                  <KeywordTag
+                    key={`slider-keywords-${slider.id}-${keywordId}`}
+                    keywordId={Number(keywordId)}
+                  />
+                ))}
+              </div>
+            )}
           {(slider.type === DiscoverSliderType.TMDB_NETWORK ||
             slider.type === DiscoverSliderType.TMDB_STUDIO) && (
-            <CompanyTag
-              type={
-                slider.type === DiscoverSliderType.TMDB_STUDIO
-                  ? 'studio'
-                  : 'network'
-              }
-              companyId={Number(slider.data)}
-            />
-          )}
+              <CompanyTag
+                type={
+                  slider.type === DiscoverSliderType.TMDB_STUDIO
+                    ? 'studio'
+                    : 'network'
+                }
+                companyId={Number(slider.data)}
+              />
+            )}
           {(slider.type === DiscoverSliderType.TMDB_TV_GENRE ||
             slider.type === DiscoverSliderType.TMDB_MOVIE_GENRE) && (
-            <GenreTag
-              type={
-                slider.type === DiscoverSliderType.TMDB_MOVIE_GENRE
-                  ? 'movie'
-                  : 'tv'
-              }
-              genreId={Number(slider.data)}
-            />
-          )}
+              <GenreTag
+                type={
+                  slider.type === DiscoverSliderType.TMDB_MOVIE_GENRE
+                    ? 'movie'
+                    : 'tv'
+                }
+                genreId={Number(slider.data)}
+              />
+            )}
           {slider.type === DiscoverSliderType.TMDB_SEARCH && (
             <Tag iconSvg={<MagnifyingGlassIcon />}>{slider.data}</Tag>
           )}
@@ -287,7 +285,7 @@ const DiscoverSliderEdit = ({
           )}
           <div className="absolute right-14 top-4 flex px-2 md:relative md:right-0 md:top-0">
             <button
-              className={'hover:text-white disabled:text-gray-800'}
+              className={'hover:text-white disabled:text-background-secondary'}
               onClick={() =>
                 onPositionUpdate(Number(slider.id), Position.Above, true)
               }
@@ -296,7 +294,7 @@ const DiscoverSliderEdit = ({
               <ChevronUpIcon className="h-7 w-7 md:h-6 md:w-6" />
             </button>
             <button
-              className={'hover:text-white disabled:text-gray-800'}
+              className={'hover:text-white disabled:text-background-secondary'}
               onClick={() =>
                 onPositionUpdate(Number(slider.id), Position.Below, true)
               }

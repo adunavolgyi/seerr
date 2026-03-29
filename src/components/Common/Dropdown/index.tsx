@@ -24,8 +24,8 @@ const DropdownItem = ({
         className={[
           'button-md flex cursor-pointer items-center rounded px-4 py-2 text-sm leading-5 text-white focus:text-white focus:outline-none',
           buttonType === 'ghost'
-            ? 'bg-transparent from-indigo-600 to-purple-600 hover:bg-gradient-to-br focus:border-gray-500'
-            : 'bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700',
+            ? 'bg-transparent from-amber-600 to-amber-500 hover:bg-gradient-to-br focus:border-border-light'
+            : 'bg-amber-600 hover:bg-amber-500 focus:border-amber-700',
         ].join(' ')}
         {...props}
       >
@@ -59,8 +59,8 @@ const DropdownItems = ({
         className={[
           'absolute right-0 z-40 -mr-1 mt-2 w-56 origin-top-right rounded-md p-1 shadow-lg',
           dropdownType === 'ghost'
-            ? 'border border-gray-700 bg-gray-800/80 backdrop-blur'
-            : 'bg-indigo-600',
+            ? 'border border-border bg-background-secondary/80 backdrop-blur'
+            : 'bg-amber-600',
           className,
         ].join(' ')}
         {...props}
@@ -94,8 +94,8 @@ const Dropdown = ({
         className={[
           'button-md inline-flex h-full items-center space-x-2 rounded-md border px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out hover:z-20 focus:z-20 focus:outline-none',
           buttonType === 'ghost'
-            ? 'border-gray-600 bg-transparent hover:border-gray-200 focus:border-gray-100 active:border-gray-100'
-            : `focus:ring-blue border-indigo-500 bg-indigo-600/80 hover:border-indigo-500 hover:bg-indigo-600 active:border-indigo-700 active:bg-indigo-700`,
+            ? 'border-border-dark bg-transparent hover:border-text-secondary/50 focus:border-text-primary active:border-text-primary'
+            : `focus:ring-amber border-amber-500 bg-amber-600/80 hover:border-amber-500 hover:bg-amber-600 active:border-amber-700 active:bg-amber-700`,
           className,
         ].join(' ')}
         ref={buttonRef}

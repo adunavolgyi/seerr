@@ -86,11 +86,11 @@ export type RadarrTestResponse = DVRTestResponse;
 
 export type SonarrTestResponse = DVRTestResponse & {
   languageProfiles:
-    | {
-        id: number;
-        name: string;
-      }[]
-    | null;
+  | {
+    id: number;
+    name: string;
+  }[]
+  | null;
 };
 
 const ServerInstance = ({
@@ -182,7 +182,7 @@ const ServerInstance = ({
           <div className="flex w-0 flex-1 border-r border-gray-500">
             <button
               onClick={() => onEdit()}
-              className="focus:ring-blue relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
+              className="focus:ring-amber relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
             >
               <PencilIcon className="mr-2 h-5 w-5" />
               <span>{intl.formatMessage(globalMessages.edit)}</span>
@@ -191,7 +191,7 @@ const ServerInstance = ({
           <div className="-ml-px flex w-0 flex-1">
             <button
               onClick={() => onDelete()}
-              className="focus:ring-blue relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
+              className="focus:ring-amber relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
             >
               <TrashIcon className="mr-2 h-5 w-5" />
               <span>{intl.formatMessage(globalMessages.delete)}</span>
@@ -346,8 +346,8 @@ const SettingsServices = () => {
                   })}
                 />
               ) : !radarrData.some(
-                  (radarr) => radarr.isDefault && !radarr.is4k
-                ) ? (
+                (radarr) => radarr.isDefault && !radarr.is4k
+              ) ? (
                 <Alert
                   title={intl.formatMessage(messages.noDefaultNon4kServer, {
                     serverType: 'Radarr',
@@ -434,8 +434,8 @@ const SettingsServices = () => {
                   })}
                 />
               ) : !sonarrData.some(
-                  (sonarr) => sonarr.isDefault && !sonarr.is4k
-                ) ? (
+                (sonarr) => sonarr.isDefault && !sonarr.is4k
+              ) ? (
                 <Alert
                   title={intl.formatMessage(messages.noDefaultNon4kServer, {
                     serverType: 'Sonarr',

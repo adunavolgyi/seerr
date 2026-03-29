@@ -63,9 +63,8 @@ const MultiRangeSlider = ({
           min={min}
           max={max}
           value={valueMin}
-          className={`pointer-events-none absolute h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-700 ${
-            valueMin >= valueMax && valueMin !== min ? 'z-30' : 'z-10'
-          }`}
+          className={`pointer-events-none absolute h-2 w-full cursor-pointer appearance-none rounded-lg bg-surface ${valueMin >= valueMax && valueMin !== min ? 'z-30' : 'z-10'
+            }`}
           onChange={(e) => {
             const value = Number(e.target.value);
 
@@ -95,14 +94,14 @@ const MultiRangeSlider = ({
         />
       </Tooltip>
       <div
-        className="pointer-events-none absolute top-0 z-30 ml-1 mr-1 h-2 bg-indigo-500"
+        className="pointer-events-none absolute top-0 z-30 ml-1 mr-1 h-2 bg-amber-500"
         style={{
           left: `${minThumb}%`,
           right: `${100 - maxThumb}%`,
         }}
       />
       {subText && (
-        <div className="relative top-4 z-30 flex w-full justify-center text-sm text-gray-400">
+        <div className="relative top-4 z-30 flex w-full justify-center text-sm text-text-secondary">
           <span>{subText}</span>
         </div>
       )}

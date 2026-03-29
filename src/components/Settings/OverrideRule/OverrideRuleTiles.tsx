@@ -66,10 +66,9 @@ const OverrideRuleTiles = ({
       const { hostname, port, apiKey, baseUrl, useSsl = false } = service;
       try {
         const response = await axios.post<DVRTestResponse>(
-          `/api/v1/settings/${
-            radarrServices.includes(service as RadarrSettings)
-              ? 'radarr'
-              : 'sonarr'
+          `/api/v1/settings/${radarrServices.includes(service as RadarrSettings)
+            ? 'radarr'
+            : 'sonarr'
           }/test`,
           {
             hostname,
@@ -280,7 +279,7 @@ const OverrideRuleTiles = ({
               <div className="flex w-0 flex-1 border-r border-gray-500">
                 <button
                   onClick={() => setOverrideRuleModal({ open: true, rule })}
-                  className="focus:ring-blue relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
+                  className="focus:ring-amber relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
                 >
                   <PencilIcon className="mr-2 h-5 w-5" />
                   <span>{intl.formatMessage(globalMessages.edit)}</span>
@@ -292,7 +291,7 @@ const OverrideRuleTiles = ({
                     await axios.delete(`/api/v1/overrideRule/${rule.id}`);
                     revalidate();
                   }}
-                  className="focus:ring-blue relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
+                  className="focus:ring-amber relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out hover:text-white focus:z-10 focus:border-gray-500 focus:outline-none"
                 >
                   <TrashIcon className="mr-2 h-5 w-5" />
                   <span>{intl.formatMessage(globalMessages.delete)}</span>

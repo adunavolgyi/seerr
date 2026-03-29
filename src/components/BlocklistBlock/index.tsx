@@ -74,7 +74,7 @@ const BlocklistBlock = ({
   }
 
   return (
-    <div className="px-4 py-3 text-gray-300">
+    <div className="px-4 py-3 text-text-primary">
       <div className="flex items-center justify-between">
         <div className="mr-6 min-w-0 flex-1 flex-col items-center text-sm leading-5">
           <div className="white mb-1 flex flex-nowrap">
@@ -91,7 +91,7 @@ const BlocklistBlock = ({
                         : `/users/${data.user.id}`
                     }
                   >
-                    <span className="font-semibold text-gray-100 transition duration-300 hover:text-white hover:underline">
+                    <span className="font-semibold text-text-primary transition duration-300 hover:text-white hover:underline">
                       {data.user.displayName}
                     </span>
                   </Link>

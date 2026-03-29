@@ -50,7 +50,7 @@ const UserDropdown = () => {
     <Menu as="div" className="relative ml-3">
       <div>
         <Menu.Button
-          className="flex max-w-xs items-center rounded-full text-sm ring-1 ring-gray-700 hover:ring-gray-500 focus:outline-none focus:ring-gray-500"
+          className="flex max-w-xs items-center rounded-full text-sm ring-1 ring-border hover:ring-border-light focus:outline-none focus:ring-border-light"
           data-testid="user-menu"
         >
           <CachedImage
@@ -74,7 +74,7 @@ const UserDropdown = () => {
         appear
       >
         <Menu.Items className="absolute right-0 mt-2 w-72 origin-top-right rounded-md shadow-lg">
-          <div className="divide-y divide-gray-700 rounded-md bg-gray-800/80 ring-1 ring-gray-700 backdrop-blur">
+          <div className="divide-y divide-border rounded-md bg-background-secondary/80 ring-1 ring-border backdrop-blur">
             <div className="flex flex-col space-y-4 px-4 py-4">
               <div className="flex items-center space-x-2">
                 <CachedImage
@@ -86,11 +86,11 @@ const UserDropdown = () => {
                   height={40}
                 />
                 <div className="flex min-w-0 flex-col">
-                  <span className="truncate text-xl font-semibold text-gray-200">
+                  <span className="truncate text-xl font-semibold text-text-primary">
                     {user?.displayName}
                   </span>
                   {user?.displayName?.toLowerCase() !== user?.email && (
-                    <span className="truncate text-sm text-gray-400">
+                    <span className="truncate text-sm text-text-secondary">
                       {user?.email}
                     </span>
                   )}
@@ -103,11 +103,10 @@ const UserDropdown = () => {
                 {({ active }) => (
                   <ForwardedLink
                     href={`/profile`}
-                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-gray-200 transition duration-150 ease-in-out ${
-                      active
-                        ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white'
-                        : ''
-                    }`}
+                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out ${active
+                      ? 'bg-gradient-to-br from-amber-600 to-amber-500 text-white'
+                      : ''
+                      }`}
                     data-testid="user-menu-profile"
                   >
                     <UserIcon className="mr-2 inline h-5 w-5" />
@@ -126,11 +125,10 @@ const UserDropdown = () => {
                         ? `/users/${user?.id}/requests?filter=all`
                         : '/requests'
                     }
-                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-gray-200 transition duration-150 ease-in-out ${
-                      active
-                        ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white'
-                        : ''
-                    }`}
+                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out ${active
+                      ? 'bg-gradient-to-br from-amber-600 to-amber-500 text-white'
+                      : ''
+                      }`}
                     data-testid="user-menu-settings"
                   >
                     <ClockIcon className="mr-2 inline h-5 w-5" />
@@ -142,11 +140,10 @@ const UserDropdown = () => {
                 {({ active }) => (
                   <ForwardedLink
                     href={`/profile/settings`}
-                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-gray-200 transition duration-150 ease-in-out ${
-                      active
-                        ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white'
-                        : ''
-                    }`}
+                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out ${active
+                      ? 'bg-gradient-to-br from-amber-600 to-amber-500 text-white'
+                      : ''
+                      }`}
                     data-testid="user-menu-settings"
                   >
                     <CogIcon className="mr-2 inline h-5 w-5" />
@@ -158,11 +155,10 @@ const UserDropdown = () => {
                 {({ active }) => (
                   <a
                     href="#"
-                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-gray-200 transition duration-150 ease-in-out ${
-                      active
-                        ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white'
-                        : ''
-                    }`}
+                    className={`flex items-center rounded px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out ${active
+                      ? 'bg-gradient-to-br from-amber-600 to-amber-500 text-white'
+                      : ''
+                      }`}
                     onClick={() => logout()}
                   >
                     <ArrowRightOnRectangleIcon className="mr-2 inline h-5 w-5" />

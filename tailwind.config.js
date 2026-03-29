@@ -11,6 +11,32 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // BociTV Color Theme
+        accent: 'var(--uiAccentColor)',
+        active: 'var(--activeColor)',
+        'active-alpha': 'var(--activeColorAlpha)',
+        background: 'var(--bgPrimary)',
+        'background-secondary': 'var(--bgSecondary)',
+        'bg-overlay': 'var(--bgOverlay)',
+        header: 'var(--headerColor)',
+        drawer: 'var(--drawerColor)',
+        surface: 'var(--surfaceColor)',
+        input: 'var(--inputBackground)',
+        table: 'var(--tableBackground)',
+        border: 'var(--borderColor)',
+        'border-dark': 'var(--borderColorDark)',
+        'border-light': 'var(--borderColorLight)',
+        'text-primary': 'var(--textPrimary)',
+        'text-secondary': 'var(--textSecondary)',
+        'btn-primary': 'var(--btnPrimary)',
+        'btn-primary-border': 'var(--btnPrimaryBorder)',
+        'btn-mini-play': 'var(--btnMiniPlay)',
+        'btn-mini-play-border': 'var(--btnMiniPlayBorder)',
+        focus: 'var(--focusColor)',
+        checkbox: 'var(--checkboxColor)',
+        glow: 'var(--glowColor)',
+      },
       transitionProperty: {
         'max-height': 'max-height',
         width: 'width',
@@ -23,9 +49,9 @@ module.exports = {
           css: {
             color: theme('colors.gray.300'),
             a: {
-              color: theme('colors.indigo.500'),
+              color: theme('colors.amber.500'),
               '&:hover': {
-                color: theme('colors.indigo.400'),
+                color: theme('colors.amber.400'),
               },
             },
 

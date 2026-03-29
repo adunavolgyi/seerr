@@ -91,7 +91,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       <Transition.Child
         appear
         as="div"
-        className="fixed bottom-0 left-0 right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-gray-800/70"
+        className="fixed bottom-0 left-0 right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-background-secondary/70"
         enter="transition-opacity duration-300"
         enterFrom="opacity-0"
         enterTo="opacity-100"
@@ -116,7 +116,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           </div>
         </Transition>
         <Transition
-          className={`hide-scrollbar relative inline-block w-full overflow-auto bg-gray-800 px-4 pb-4 pt-4 text-left align-bottom shadow-xl ring-1 ring-gray-700 transition-all sm:my-8 sm:max-w-3xl sm:rounded-lg sm:align-middle ${dialogClass}`}
+          className={`hide-scrollbar relative inline-block w-full overflow-auto bg-background-secondary px-4 pb-4 pt-4 text-left align-bottom shadow-xl ring-1 ring-border transition-all sm:my-8 sm:max-w-3xl sm:rounded-lg sm:align-middle ${dialogClass}`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -170,7 +170,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                   )}
                   {subTitle && (
                     <span
-                      className="truncate text-lg font-semibold leading-6 text-gray-200"
+                      className="truncate text-lg font-semibold leading-6 text-text-primary"
                       id="modal-headline"
                       data-testid="modal-title"
                     >
@@ -183,9 +183,8 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           </div>
           {children && (
             <div
-              className={`relative mt-4 text-sm leading-5 text-gray-300 ${
-                !(onCancel || onOk || onSecondary || onTertiary) ? 'mb-3' : ''
-              }`}
+              className={`relative mt-4 text-sm leading-5 text-text-secondary ${!(onCancel || onOk || onSecondary || onTertiary) ? 'mb-3' : ''
+                }`}
             >
               {children}
             </div>

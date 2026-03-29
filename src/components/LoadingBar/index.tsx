@@ -11,12 +11,11 @@ interface BarProps {
 const Bar = ({ progress, isFinished }: BarProps) => {
   return (
     <div
-      className={`duration-400 fixed left-0 top-0 z-50 w-full transition-opacity ease-out ${
-        isFinished ? 'opacity-0' : 'opacity-100'
-      }`}
+      className={`duration-400 fixed left-0 top-0 z-50 w-full transition-opacity ease-out ${isFinished ? 'opacity-0' : 'opacity-100'
+        }`}
     >
       <div
-        className="bg-indigo-400 transition-width duration-300"
+        className="bg-amber-400 transition-width duration-300"
         style={{
           height: '3px',
           width: `${progress * 100}%`,
@@ -64,9 +63,9 @@ const LoadingBar = (): React.ReactPortal | null => {
 
   return mounted
     ? ReactDOM.createPortal(
-        <MemoizedNProgress loading={loading} />,
-        document.body
-      )
+      <MemoizedNProgress loading={loading} />,
+      document.body
+    )
     : null;
 };
 

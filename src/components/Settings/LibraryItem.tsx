@@ -24,33 +24,29 @@ const LibraryItem = ({ isEnabled, name, onToggle }: LibraryItemProps) => {
                 onToggle();
               }
             }}
-            className={`${
-              isEnabled ? 'bg-indigo-600' : 'bg-gray-700'
-            } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring`}
+            className={`${isEnabled ? 'bg-amber-600' : 'bg-gray-700'
+              } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring`}
           >
             <span
               aria-hidden="true"
-              className={`${
-                isEnabled ? 'translate-x-5' : 'translate-x-0'
-              } relative inline-block h-5 w-5 rounded-full bg-white shadow transition duration-200 ease-in-out`}
+              className={`${isEnabled ? 'translate-x-5' : 'translate-x-0'
+                } relative inline-block h-5 w-5 rounded-full bg-white shadow transition duration-200 ease-in-out`}
             >
               <span
-                className={`${
-                  isEnabled
+                className={`${isEnabled
                     ? 'opacity-0 duration-100 ease-out'
                     : 'opacity-100 duration-200 ease-in'
-                } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
+                  } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
               >
                 <XMarkIcon className="h-3 w-3 text-gray-400" />
               </span>
               <span
-                className={`${
-                  isEnabled
+                className={`${isEnabled
                     ? 'opacity-100 duration-200 ease-in'
                     : 'opacity-0 duration-100 ease-out'
-                } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
+                  } absolute inset-0 flex h-full w-full items-center justify-center transition-opacity`}
               >
-                <CheckIcon className="h-3 w-3 text-indigo-600" />
+                <CheckIcon className="h-3 w-3 text-amber-600" />
               </span>
             </span>
           </span>

@@ -30,35 +30,34 @@ const DownloadBlock = ({
           ? downloadItem.title
           : downloadItem.episode
             ? intl.formatMessage(messages.formattedTitle, {
-                title,
-                seasonNumber: downloadItem?.episode?.seasonNumber,
-                episodeNumber: downloadItem?.episode?.episodeNumber,
-              })
+              title,
+              seasonNumber: downloadItem?.episode?.seasonNumber,
+              episodeNumber: downloadItem?.episode?.episodeNumber,
+            })
             : title}
       </div>
-      <div className="relative mb-2 h-6 min-w-0 overflow-hidden rounded-full bg-gray-700">
+      <div className="relative mb-2 h-6 min-w-0 overflow-hidden rounded-full bg-surface">
         <div
-          className="h-8 bg-indigo-600 transition-all duration-200 ease-in-out"
+          className="h-8 bg-amber-600 transition-all duration-200 ease-in-out"
           style={{
-            width: `${
-              downloadItem.size
-                ? Math.round(
-                    ((downloadItem.size - downloadItem.sizeLeft) /
-                      downloadItem.size) *
-                      100
-                  )
-                : 0
-            }%`,
+            width: `${downloadItem.size
+              ? Math.round(
+                ((downloadItem.size - downloadItem.sizeLeft) /
+                  downloadItem.size) *
+                100
+              )
+              : 0
+              }%`,
           }}
         />
         <div className="absolute inset-0 flex h-6 w-full items-center justify-center text-xs">
           <span>
             {downloadItem.size
               ? Math.round(
-                  ((downloadItem.size - downloadItem.sizeLeft) /
-                    downloadItem.size) *
-                    100
-                )
+                ((downloadItem.size - downloadItem.sizeLeft) /
+                  downloadItem.size) *
+                100
+              )
               : 0}
             %
           </span>
@@ -76,20 +75,20 @@ const DownloadBlock = ({
         <span>
           {downloadItem.estimatedCompletionTime
             ? intl.formatMessage(messages.estimatedtime, {
-                time: (
-                  <FormattedRelativeTime
-                    value={Math.floor(
-                      (new Date(
-                        downloadItem.estimatedCompletionTime
-                      ).getTime() -
-                        Date.now()) /
-                        1000
-                    )}
-                    updateIntervalInSeconds={1}
-                    numeric="auto"
-                  />
-                ),
-              })
+              time: (
+                <FormattedRelativeTime
+                  value={Math.floor(
+                    (new Date(
+                      downloadItem.estimatedCompletionTime
+                    ).getTime() -
+                      Date.now()) /
+                    1000
+                  )}
+                  updateIntervalInSeconds={1}
+                  numeric="auto"
+                />
+              ),
+            })
             : ''}
         </span>
       </div>

@@ -55,7 +55,7 @@ const IssueItem = ({ issue }: IssueItemProps) => {
   if (!title && !error) {
     return (
       <div
-        className="h-64 w-full animate-pulse rounded-xl bg-gray-800 xl:h-28"
+        className="h-64 w-full animate-pulse rounded-xl bg-background-secondary xl:h-28"
         ref={ref}
       />
     );
@@ -117,7 +117,7 @@ const IssueItem = ({ issue }: IssueItemProps) => {
     : description;
 
   return (
-    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-gray-800 py-4 text-gray-400 shadow-md ring-1 ring-gray-700 xl:flex-row">
+    <div className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-background-secondary py-4 text-text-secondary shadow-md ring-1 ring-border xl:flex-row">
       {title.backdropPath && (
         <div className="absolute inset-0 z-0 w-full bg-cover bg-center xl:w-2/3">
           <CachedImage
@@ -179,15 +179,15 @@ const IssueItem = ({ issue }: IssueItemProps) => {
             </Link>
             {description && (
               <div className="mt-1 max-w-full">
-                <div className="overflow-hidden text-sm text-gray-300">
+                <div className="overflow-hidden text-sm text-text-secondary">
                   {shouldTruncate ? (
                     <Tooltip
                       content={
                         <div className="max-w-sm p-3">
-                          <div className="mb-1 text-sm font-medium text-gray-200">
+                          <div className="mb-1 text-sm font-medium text-text-secondary/80">
                             Issue Description
                           </div>
-                          <div className="whitespace-pre-wrap text-sm leading-relaxed text-gray-300">
+                          <div className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
                             {description}
                           </div>
                         </div>
@@ -197,7 +197,7 @@ const IssueItem = ({ issue }: IssueItemProps) => {
                         offset: [0, 8],
                       }}
                     >
-                      <span className="block cursor-help truncate transition-colors hover:text-gray-200">
+                      <span className="block cursor-help truncate transition-colors hover:text-text-secondary/80">
                         {truncatedDescription}
                       </span>
                     </Tooltip>
@@ -235,7 +235,7 @@ const IssueItem = ({ issue }: IssueItemProps) => {
             <span className="card-field-name">
               {intl.formatMessage(messages.issuetype)}
             </span>
-            <span className="flex truncate text-sm text-gray-300">
+            <span className="flex truncate text-sm text-text-secondary">
               {intl.formatMessage(
                 issueOption?.name ?? messages.unknownissuetype
               )}
@@ -249,13 +249,13 @@ const IssueItem = ({ issue }: IssueItemProps) => {
                 <span className="card-field-name">
                   {intl.formatMessage(messages.opened)}
                 </span>
-                <span className="flex truncate text-sm text-gray-300">
+                <span className="flex truncate text-sm text-text-secondary">
                   {intl.formatMessage(messages.openeduserdate, {
                     date: (
                       <FormattedRelativeTime
                         value={Math.floor(
                           (new Date(issue.createdAt).getTime() - Date.now()) /
-                            1000
+                          1000
                         )}
                         updateIntervalInSeconds={1}
                         numeric="auto"
@@ -287,7 +287,7 @@ const IssueItem = ({ issue }: IssueItemProps) => {
                 <span className="card-field-name">
                   {intl.formatMessage(messages.opened)}
                 </span>
-                <span className="flex truncate text-sm text-gray-300">
+                <span className="flex truncate text-sm text-text-secondary">
                   <FormattedRelativeTime
                     value={Math.floor(
                       (new Date(issue.createdAt).getTime() - Date.now()) / 1000

@@ -236,40 +236,40 @@ const ManageSlideOver = ({
       <div className="space-y-6">
         {((data?.mediaInfo?.downloadStatus ?? []).length > 0 ||
           (data?.mediaInfo?.downloadStatus4k ?? []).length > 0) && (
-          <div>
-            <h3 className="mb-2 text-xl font-bold">
-              {intl.formatMessage(messages.downloadstatus)}
-            </h3>
-            <div className="overflow-hidden rounded-md border border-gray-700 shadow">
-              <ul>
-                {filterDuplicateDownloads(data.mediaInfo?.downloadStatus).map(
-                  (status, index) => (
-                    <Tooltip
-                      key={`dl-status-${status.externalId}-${index}`}
-                      content={status.title}
-                    >
-                      <li className="border-b border-gray-700 last:border-b-0">
-                        <DownloadBlock downloadItem={status} />
-                      </li>
-                    </Tooltip>
-                  )
-                )}
-                {filterDuplicateDownloads(data.mediaInfo?.downloadStatus4k).map(
-                  (status, index) => (
-                    <Tooltip
-                      key={`dl-status-4k-${status.externalId}-${index}`}
-                      content={status.title}
-                    >
-                      <li className="border-b border-gray-700 last:border-b-0">
-                        <DownloadBlock downloadItem={status} is4k />
-                      </li>
-                    </Tooltip>
-                  )
-                )}
-              </ul>
+            <div>
+              <h3 className="mb-2 text-xl font-bold">
+                {intl.formatMessage(messages.downloadstatus)}
+              </h3>
+              <div className="overflow-hidden rounded-md border border-border shadow">
+                <ul>
+                  {filterDuplicateDownloads(data.mediaInfo?.downloadStatus).map(
+                    (status, index) => (
+                      <Tooltip
+                        key={`dl-status-${status.externalId}-${index}`}
+                        content={status.title}
+                      >
+                        <li className="border-b border-border last:border-b-0">
+                          <DownloadBlock downloadItem={status} />
+                        </li>
+                      </Tooltip>
+                    )
+                  )}
+                  {filterDuplicateDownloads(data.mediaInfo?.downloadStatus4k).map(
+                    (status, index) => (
+                      <Tooltip
+                        key={`dl-status-4k-${status.externalId}-${index}`}
+                        content={status.title}
+                      >
+                        <li className="border-b border-border last:border-b-0">
+                          <DownloadBlock downloadItem={status} is4k />
+                        </li>
+                      </Tooltip>
+                    )
+                  )}
+                </ul>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {hasPermission([Permission.MANAGE_ISSUES, Permission.VIEW_ISSUES], {
           type: 'or',
         }) &&
@@ -278,12 +278,12 @@ const ManageSlideOver = ({
               <h3 className="mb-2 text-xl font-bold">
                 {intl.formatMessage(messages.manageModalIssues)}
               </h3>
-              <div className="overflow-hidden rounded-md border border-gray-700 shadow">
+              <div className="overflow-hidden rounded-md border border-border shadow">
                 <ul>
                   {openIssues.map((issue) => (
                     <li
                       key={`manage-issue-${issue.id}`}
-                      className="border-b border-gray-700 last:border-b-0"
+                      className="border-b border-border last:border-b-0"
                     >
                       <IssueBlock issue={issue} />
                     </li>
@@ -341,13 +341,12 @@ const ManageSlideOver = ({
                   <div>
                     {!!watchData?.data && (
                       <div
-                        className={`grid grid-cols-1 divide-y divide-gray-700 overflow-hidden border-gray-700 text-sm text-gray-300 shadow ${
-                          data.mediaInfo?.tautulliUrl
-                            ? 'rounded-t-md border-x border-t'
-                            : 'rounded-md border'
-                        }`}
+                        className={`grid grid-cols-1 divide-y divide-border overflow-hidden border-border text-sm text-text-secondary shadow ${data.mediaInfo?.tautulliUrl
+                          ? 'rounded-t-md border-x border-t'
+                          : 'rounded-md border'
+                          }`}
                       >
-                        <div className="grid grid-cols-3 divide-x divide-gray-700">
+                        <div className="grid grid-cols-3 divide-x divide-border">
                           <div className="px-4 py-3">
                             <div className="font-bold">
                               {intl.formatMessage(messages.pastdays, {
@@ -421,9 +420,8 @@ const ManageSlideOver = ({
                       >
                         <Button
                           buttonType="ghost"
-                          className={`w-full ${
-                            watchData?.data ? 'rounded-t-none' : ''
-                          }`}
+                          className={`w-full ${watchData?.data ? 'rounded-t-none' : ''
+                            }`}
                         >
                           <Bars4Icon />
                           <span>
@@ -470,7 +468,7 @@ const ManageSlideOver = ({
                           })}
                         </span>
                       </ConfirmButton>
-                      <div className="mt-1 text-xs text-gray-400">
+                      <div className="mt-1 text-xs text-text-secondary">
                         {intl.formatMessage(
                           messages.manageModalRemoveMediaWarning,
                           {
@@ -501,13 +499,12 @@ const ManageSlideOver = ({
                   <div>
                     {watchData?.data4k && (
                       <div
-                        className={`grid grid-cols-1 divide-y divide-gray-700 overflow-hidden border-gray-700 text-sm text-gray-300 shadow ${
-                          data.mediaInfo?.tautulliUrl4k
-                            ? 'rounded-t-md border-x border-t'
-                            : 'rounded-md border'
-                        }`}
+                        className={`grid grid-cols-1 divide-y divide-border overflow-hidden border-border text-sm text-text-secondary shadow ${data.mediaInfo?.tautulliUrl4k
+                          ? 'rounded-t-md border-x border-t'
+                          : 'rounded-md border'
+                          }`}
                       >
-                        <div className="grid grid-cols-3 divide-x divide-gray-700">
+                        <div className="grid grid-cols-3 divide-x divide-border">
                           <div className="px-4 py-3">
                             <div className="font-bold">
                               {intl.formatMessage(messages.pastdays, {
@@ -583,9 +580,8 @@ const ManageSlideOver = ({
                       >
                         <Button
                           buttonType="ghost"
-                          className={`w-full ${
-                            watchData?.data4k ? 'rounded-t-none' : ''
-                          }`}
+                          className={`w-full ${watchData?.data4k ? 'rounded-t-none' : ''
+                            }`}
                         >
                           <Bars4Icon />
                           <span>
@@ -648,8 +644,10 @@ const ManageSlideOver = ({
                 )}
               </div>
             </div>
-          )}
-        {hasPermission(Permission.ADMIN) &&
+          )
+        }
+        {
+          hasPermission(Permission.ADMIN) &&
           data?.mediaInfo &&
           data.mediaInfo.status !== MediaStatus.BLOCKLISTED && (
             <div>
@@ -701,17 +699,17 @@ const ManageSlideOver = ({
                       {intl.formatMessage(messages.manageModalClearMedia)}
                     </span>
                   </ConfirmButton>
-                  <div className="mt-2 text-xs text-gray-400">
+                  <div className="mt-2 text-xs text-text-secondary">
                     {intl.formatMessage(messages.manageModalClearMediaWarning, {
                       mediaType: intl.formatMessage(
                         mediaType === 'movie' ? messages.movie : messages.tvshow
                       ),
                       mediaServerName:
                         settings.currentSettings.mediaServerType ===
-                        MediaServerType.EMBY
+                          MediaServerType.EMBY
                           ? 'Emby'
                           : settings.currentSettings.mediaServerType ===
-                              MediaServerType.PLEX
+                            MediaServerType.PLEX
                             ? 'Plex'
                             : 'Jellyfin',
                     })}
@@ -719,9 +717,10 @@ const ManageSlideOver = ({
                 </div>
               </div>
             </div>
-          )}
-      </div>
-    </SlideOver>
+          )
+        }
+      </div >
+    </SlideOver >
   );
 };
 

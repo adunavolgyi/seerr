@@ -99,30 +99,29 @@ const RegionSelector = ({
         {({ open }) => (
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
-              <Listbox.Button className="focus:shadow-outline-blue relative flex w-full cursor-default items-center rounded-md border border-gray-500 bg-gray-700 py-2 pl-3 pr-10 text-left text-white transition duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5">
+              <Listbox.Button className="focus:shadow-outline-amber relative flex w-full cursor-default items-center rounded-md border border-gray-500 bg-gray-700 py-2 pl-3 pr-10 text-left text-white transition duration-150 ease-in-out focus:border-amber-300 focus:outline-none sm:text-sm sm:leading-5">
                 {((selectedRegion &&
                   countries.includes(selectedRegion?.iso_3166_1)) ||
                   (isUserSetting &&
                     !selectedRegion &&
                     regionValue &&
                     countries.includes(regionValue))) && (
-                  <span className="mr-2 h-4 overflow-hidden text-base leading-4">
-                    <span
-                      className={`flag:${
-                        selectedRegion ? selectedRegion.iso_3166_1 : regionValue
-                      }`}
-                    />
-                  </span>
-                )}
+                    <span className="mr-2 h-4 overflow-hidden text-base leading-4">
+                      <span
+                        className={`flag:${selectedRegion ? selectedRegion.iso_3166_1 : regionValue
+                          }`}
+                      />
+                    </span>
+                  )}
                 <span className="block truncate">
                   {selectedRegion && selectedRegion.iso_3166_1 !== 'all'
                     ? regionName(selectedRegion.iso_3166_1)
                     : isUserSetting && selectedRegion?.iso_3166_1 !== 'all'
                       ? intl.formatMessage(messages.regionServerDefault, {
-                          region: regionValue
-                            ? regionName(regionValue)
-                            : intl.formatMessage(messages.regionDefault),
-                        })
+                        region: regionValue
+                          ? regionName(regionValue)
+                          : intl.formatMessage(messages.regionDefault),
+                      })
                       : intl.formatMessage(messages.regionDefault)}
                 </span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500">
@@ -146,9 +145,8 @@ const RegionSelector = ({
                   <Listbox.Option value={null}>
                     {({ selected, active }) => (
                       <div
-                        className={`${
-                          active ? 'bg-indigo-600 text-white' : 'text-gray-300'
-                        } relative flex cursor-default select-none items-center py-2 pl-8 pr-4`}
+                        className={`${active ? 'bg-amber-600 text-white' : 'text-gray-300'
+                          } relative flex cursor-default select-none items-center py-2 pl-8 pr-4`}
                       >
                         <span className="mr-2 text-base">
                           <span
@@ -160,9 +158,8 @@ const RegionSelector = ({
                           />
                         </span>
                         <span
-                          className={`${
-                            selected ? 'font-semibold' : 'font-normal'
-                          } block truncate`}
+                          className={`${selected ? 'font-semibold' : 'font-normal'
+                            } block truncate`}
                         >
                           {intl.formatMessage(messages.regionServerDefault, {
                             region: regionValue
@@ -172,9 +169,8 @@ const RegionSelector = ({
                         </span>
                         {selected && (
                           <span
-                            className={`${
-                              active ? 'text-white' : 'text-indigo-600'
-                            } absolute inset-y-0 left-0 flex items-center pl-1.5`}
+                            className={`${active ? 'text-white' : 'text-amber-600'
+                              } absolute inset-y-0 left-0 flex items-center pl-1.5`}
                           >
                             <CheckIcon className="h-5 w-5" />
                           </span>
@@ -187,22 +183,19 @@ const RegionSelector = ({
                   <Listbox.Option value={isUserSetting ? allRegion : null}>
                     {({ selected, active }) => (
                       <div
-                        className={`${
-                          active ? 'bg-indigo-600 text-white' : 'text-gray-300'
-                        } relative cursor-default select-none py-2 pl-8 pr-4`}
+                        className={`${active ? 'bg-amber-600 text-white' : 'text-gray-300'
+                          } relative cursor-default select-none py-2 pl-8 pr-4`}
                       >
                         <span
-                          className={`${
-                            selected ? 'font-semibold' : 'font-normal'
-                          } block truncate pl-8`}
+                          className={`${selected ? 'font-semibold' : 'font-normal'
+                            } block truncate pl-8`}
                         >
                           {intl.formatMessage(messages.regionDefault)}
                         </span>
                         {selected && (
                           <span
-                            className={`${
-                              active ? 'text-white' : 'text-indigo-600'
-                            } absolute inset-y-0 left-0 flex items-center pl-1.5`}
+                            className={`${active ? 'text-white' : 'text-amber-600'
+                              } absolute inset-y-0 left-0 flex items-center pl-1.5`}
                           >
                             <CheckIcon className="h-5 w-5" />
                           </span>
@@ -215,9 +208,8 @@ const RegionSelector = ({
                   <Listbox.Option key={region.iso_3166_1} value={region}>
                     {({ selected, active }) => (
                       <div
-                        className={`${
-                          active ? 'bg-indigo-600 text-white' : 'text-gray-300'
-                        } relative flex cursor-default select-none items-center py-2 pl-8 pr-4`}
+                        className={`${active ? 'bg-amber-600 text-white' : 'text-gray-300'
+                          } relative flex cursor-default select-none items-center py-2 pl-8 pr-4`}
                       >
                         <span className="mr-2 text-base">
                           <span
@@ -229,17 +221,15 @@ const RegionSelector = ({
                           />
                         </span>
                         <span
-                          className={`${
-                            selected ? 'font-semibold' : 'font-normal'
-                          } block truncate`}
+                          className={`${selected ? 'font-semibold' : 'font-normal'
+                            } block truncate`}
                         >
                           {regionName(region.iso_3166_1)}
                         </span>
                         {selected && (
                           <span
-                            className={`${
-                              active ? 'text-white' : 'text-indigo-600'
-                            } absolute inset-y-0 left-0 flex items-center pl-1.5`}
+                            className={`${active ? 'text-white' : 'text-amber-600'
+                              } absolute inset-y-0 left-0 flex items-center pl-1.5`}
                           >
                             <CheckIcon className="h-5 w-5" />
                           </span>

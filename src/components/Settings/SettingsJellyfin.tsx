@@ -324,7 +324,7 @@ const SettingsJellyfin: React.FC<SettingsJellyfinProps> = ({
           <div className="relative mb-6 h-8 w-full overflow-hidden rounded-full bg-gray-600">
             {dataSync?.running && (
               <div
-                className="h-8 bg-indigo-600 transition-all duration-200 ease-in-out"
+                className="h-8 bg-amber-600 transition-all duration-200 ease-in-out"
                 style={{
                   width: `${Math.round(
                     (dataSync.progress / dataSync.total) * 100
@@ -360,11 +360,11 @@ const SettingsJellyfin: React.FC<SettingsJellyfinProps> = ({
                       values={{
                         count: dataSync.currentLibrary
                           ? dataSync.libraries.slice(
-                              dataSync.libraries.findIndex(
-                                (library) =>
-                                  library.id === dataSync.currentLibrary?.id
-                              ) + 1
-                            ).length
+                            dataSync.libraries.findIndex(
+                              (library) =>
+                                library.id === dataSync.currentLibrary?.id
+                            ) + 1
+                          ).length
                           : 0,
                       }}
                     />

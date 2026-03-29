@@ -104,21 +104,21 @@ const UserGeneralSettings = () => {
     email:
       // email is required for everybody except non-admin jellyfin users
       user?.id === 1 ||
-      (user?.userType !== UserType.JELLYFIN && user?.userType !== UserType.EMBY)
+        (user?.userType !== UserType.JELLYFIN && user?.userType !== UserType.EMBY)
         ? Yup.string()
-            .test(
-              'email',
-              intl.formatMessage(messages.validationemailformat),
-              (value) =>
-                !value || validator.isEmail(value, { require_tld: false })
-            )
-            .required(intl.formatMessage(messages.validationemailrequired))
-        : Yup.string().test(
+          .test(
             'email',
             intl.formatMessage(messages.validationemailformat),
             (value) =>
               !value || validator.isEmail(value, { require_tld: false })
-          ),
+          )
+          .required(intl.formatMessage(messages.validationemailrequired))
+        : Yup.string().test(
+          'email',
+          intl.formatMessage(messages.validationemailformat),
+          (value) =>
+            !value || validator.isEmail(value, { require_tld: false })
+        ),
     discordId: Yup.string()
       .nullable()
       .matches(/^\d{17,19}$/, intl.formatMessage(messages.validationDiscordId)),
@@ -331,7 +331,7 @@ const UserGeneralSettings = () => {
                       disabled={user?.plexUsername}
                       className={
                         user?.warnings.find((w) => w === 'userEmailRequired')
-                          ? 'border-2 border-red-400 focus:border-blue-600'
+                          ? 'border-2 border-red-400 focus:border-amber-600'
                           : ''
                       }
                     />

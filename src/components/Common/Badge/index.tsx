@@ -3,13 +3,13 @@ import React from 'react';
 
 interface BadgeProps {
   badgeType?:
-    | 'default'
-    | 'primary'
-    | 'danger'
-    | 'warning'
-    | 'success'
-    | 'dark'
-    | 'light';
+  | 'default'
+  | 'primary'
+  | 'danger'
+  | 'warning'
+  | 'success'
+  | 'dark'
+  | 'light';
   className?: string;
   href?: string;
   children: React.ReactNode;
@@ -53,23 +53,23 @@ const Badge = (
       }
       break;
     case 'dark':
-      badgeStyle.push('bg-gray-900 !text-gray-400');
+      badgeStyle.push('bg-background !text-text-secondary');
       if (href) {
-        badgeStyle.push('hover:bg-gray-800');
+        badgeStyle.push('hover:bg-background-secondary');
       }
       break;
     case 'light':
-      badgeStyle.push('bg-gray-700 !text-gray-300');
+      badgeStyle.push('bg-surface !text-text-primary');
       if (href) {
-        badgeStyle.push('hover:bg-gray-600');
+        badgeStyle.push('hover:bg-surface');
       }
       break;
     default:
       badgeStyle.push(
-        'bg-indigo-500/80 border border-indigo-500 !text-indigo-100'
+        'bg-amber-500/80 border border-amber-500 !text-amber-100'
       );
       if (href) {
-        badgeStyle.push('hover:bg-indigo-500');
+        badgeStyle.push('hover:bg-amber-500');
       }
   }
 

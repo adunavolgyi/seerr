@@ -1,6 +1,6 @@
 export const SmallLoadingSpinner = () => {
   return (
-    <div className="inset-0 flex h-full w-full items-center justify-center text-gray-200">
+    <div className="inset-0 flex h-full w-full items-center justify-center text-text-primary">
       <svg
         className="h-10 w-10"
         viewBox="0 0 38 38"
@@ -29,7 +29,7 @@ export const SmallLoadingSpinner = () => {
 
 const LoadingSpinner = () => {
   return (
-    <div className="inset-0 flex h-64 items-center justify-center text-gray-200">
+    <div className="inset-0 flex h-64 items-center justify-center text-text-primary">
       <svg
         className="h-16 w-16"
         viewBox="0 0 38 38"
