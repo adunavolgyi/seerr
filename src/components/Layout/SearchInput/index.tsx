@@ -24,7 +24,7 @@ const SearchInput = () => {
           <input
             id="search_field"
             style={{ paddingRight: searchValue.length > 0 ? '1.75rem' : '' }}
-            className="block w-full rounded-full border border-border-dark bg-background-primary/80 py-2 pl-10 text-white placeholder-text-secondary hover:border-border focus:border-border focus:bg-background-primary focus:placeholder-text-secondary/80 focus:outline-none focus:ring-0 sm:text-base"
+            className="block w-full rounded-full border border-border-dark bg-background-primary/80 py-2 pl-10 text-gray-900 placeholder-text-secondary hover:border-border focus:border-border focus:bg-background-primary focus:placeholder-text-secondary/80 focus:outline-none focus:ring-0 sm:text-base"
             placeholder={intl.formatMessage(messages.searchPlaceholder)}
             type="search"
             autoComplete="off"
