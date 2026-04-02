@@ -30,6 +30,14 @@ const Badge = (
   }
 
   switch (badgeType) {
+    case 'primary':
+      badgeStyle.push(
+        'bg-amber-500/80 border border-amber-500 !text-amber-100'
+      );
+      if (href) {
+        badgeStyle.push('hover:bg-amber-500');
+      }
+      break;
     case 'danger':
       badgeStyle.push('bg-red-600/80 border-red-500 border !text-red-100');
       if (href) {
